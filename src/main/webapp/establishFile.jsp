@@ -1,10 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: 458
+  Date: 2019/10/19/019
+  Time: 16:20
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; Charset=gb2312">
     <meta http-equiv="Content-Language" content="zh-CN">
@@ -19,6 +25,7 @@
     <link href="static/css/page.css" rel="stylesheet">
     <%--index页样式--%>
     <link href="static/css/index.css" rel="stylesheet">
+    <link href="static/css/test.css" rel="stylesheet">
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -31,36 +38,18 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <style type="text/css">
-        .foEvaluate{
-            text-align: left;
-            margin-left:16%;
-            margin-right: 16%;
-        }
-        .picDiv{
-            margin-top:20px;
-            text-align: center;
-            margin-left:16%;
-        }
-        .foDescribe{
-            margin-top:20px;
-            margin-left:16%;
-            margin-right:16%;
-            border: #1E9FFF 1px solid;
-            text-align: center;
-            clear: left;
-        }
-        .evaluateDiv{
-            margin-top: 20px;
-            margin-left: 16%;
-            margin-right:16%;
-            text-align: center;
-            clear: left;
+    <style>
+        .inputStyle{
+            border-top:0;
+            border-rigtht:0;
+            border-left: 0;
+            border-bottom: #0C0C0C 1px solid;
+            width: 200px;
         }
     </style>
 
 </head>
-<body class="layui-layout-body">
+<body>
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header position: absolute;">
         <a href="${ctx}/index.jsp">
@@ -70,7 +59,7 @@
             <li class="layui-nav-item"><a href="javascript:;"></a></li>
         </ul>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left head-nav-left">
+        <ul class="layui-nav layui-layout-left head-nav-left" style="margin-top: 15px;">
             <li class="dropdown pull-right layui-nav-item">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">帮助</a>
                 <ul class="dropdown-menu">
@@ -103,52 +92,78 @@
                 <label class="btn" id="logoutButton" style="display: none;" onclick="logout();">退出登录</label>
             </div>
         </ul>
+
     </div>
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div class="blog-main">
-            <div class="foEvaluate"><h2>评估流程：</h2></div>
-            <div>
-                <div class="picDiv">
-                    <div style="float: left"><a href="establishFile.jsp"><img src="static/images/establishFile.png"></a><br><h4><b>建立档案</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
-                    <div style="float: left"><a href="informationSurvey.jsp"><img src="static/images/informationSurvey.png"></a><br><h4><b>信息调查</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
-                    <div style="float: left"><a href="evaluation.jsp"><img src="static/images/evaluation.png"></a><br><h4><b>评估分析</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
-                    <div style="float: left"><a href="informationService.jsp"><img src="static/images/informationService.png"></a><br><h4><b>信息查询</b></h4></div>
-                </div>
-                <div class="foDescribe">
-                    <h2>适用单位</h2>
-                    <h4>境外产业园区管理单位、投资单位、规划设计与咨询单位、建设单位、运营单位等</h4>
-                </div>
-                <div class="evaluateDiv">
-                    <button class="btn btn-default" onclick="window.location='${ctx}/establishFile.jsp'">开始评估</button>
-                </div>
+            <div style="margin-left:60px;width: fit-content;"><h2><label class="label label-default">园区基本信息</label></h2></div>
+            <div style="font-size:20px;border: 2px solid;margin-left:60px;margin-right:60px;padding:10px;">
+                园区名称<input type="text" class="inputStyle" id="parkName">   建区年份<input type="text" class="inputStyle" id="constructionYear">  所在国家<input type="text" class="inputStyle" id="country"><br>
+                规划产业<input type="text" class="inputStyle" id="planningIndustry">   规划规模<input type="text" class="inputStyle" id="planningScale"> (km²)   评估规模（规划）<input type="text" class="inputStyle" id="evaluationScale">(km²)<br>
+                实建规模<input type="text" class="inputStyle" id="constructionScale">  (km²)   投资单位<input type="text" class="inputStyle" id="investmentUnit">   建设单位<input type="text" class="inputStyle" id="constructionUnit"><br>运营单位<input type="text" class="inputStyle" id="operatingUnit"><br>
+                总体规划平面图<br>
+                <input class="btn btn-default" type="file" name="images" onchange="viewImage(this)" id="fileupload">
+                <div id="localimage" style="width: 200px;height: 200px;border:1px dashed;text-align: center;vertical-align: center"><img src="/wp-content/uploads/2014/06/download.png" class="img-thumbnail" id="preview"></div>
+                <button class="btn btn-default" name="clear" onclick="clearImage()">清除</button>
             </div>
-            <div id="showPdf"></div>
-
-            <div><span class="share">立即分享</span></div>
+            <hr style="margin-left:60px;margin-right:60px;">
+            <div style="margin-left:60px;width: fit-content;"><h2><label class="label label-default">评估者信息</label></h2></div>
+            <div style="font-size:20px;border: 2px solid;margin-left:60px;margin-right:60px;padding: 10px;">
+                姓名<input type="text" class="inputStyle" id="personName"> 职业<input type="text" class="inputStyle" id="job">   工作单位<input type="text" class="inputStyle" id="workAddress">   手机号码<input type="text" class="inputStyle" id="phone"><br>
+                电子邮件<input type="text" class="inputStyle" id="email"> 通讯地址<input type="text" class="inputStyle" id="address">
+            </div>
+            <hr style="margin-left:60px;margin-right:60px;">
+            <div style="margin-left: 60px;text-align: center;margin-top:20px;">
+                <button class="btn btn-default" id="saveBtn">保存（S）</button>
+                <button class="btn btn-default" id="closeBtn">关闭（C）</button>
+            </div>
         </div>
         <div class="clear"></div>
     </div>
 
 </div>
-<!--二维码弹层-->
-<div id="popQRCode">
-    <div id="qrcode" style="margin-left: 30px; margin-top: 8px;"></div>
-</div>
 </body>
-
-<script src="static/plug/layui/layui.js"></script>
-<script src='static/js/jquery/jquery.min.js'></script>
-<script src='static/js/pdfobject.js'></script>
-<script src="static/plug/qrcodejs/qrcode.js"></script>
-<script src="static/js/canvasjs.min.js"></script>
-<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
-<script src="https://cdn.bootcss.com/jspdf/1.3.4/jspdf.debug.js"></script>
-<!-- ECharts单文件引入 -->
-<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 <script>
+    //upload the image and preview in the box
+    function viewImage(file){
+        var preview = document.getElementById('preview');
+        if(file.files && file.files[0]){
+            //火狐下
+            preview.style.display = "block";
+            // preview.style.width = "300px";
+            // preview.style.height = "120px";
+            preview.src = window.URL.createObjectURL(file.files[0]);
+        }else{
+            //ie下，使用滤镜
+            file.select();
+            var imgSrc = document.selection.createRange().text;
+            var localImagId = document.getElementById("localImage");
+            //必须设置初始大小
+            localImagId.style.width = "250px";
+            localImagId.style.height = "200px";
+            try{
+                localImagId.style.filter="progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+                locem("DXImageTransform.Microsoft.AlphaImageLoader").src = imgSrc;
+            }catch(e){
+                alert("您上传的图片格式不正确，请重新选择!");
+                return false;
+            }
+            preview.style.display = 'none';
+            document.selection.empty();
+        }
+        return true;
+    }
 
+    //clear the image
+    function clearImage(){
+        var preview=document.getElementById("preview");
+        preview.src="";
+
+        var obj = document.getElementById('fileupload') ;
+        obj.outerHTML=obj.outerHTML;
+    }
 
 </script>
 </html>

@@ -1,10 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: 458
+  Date: 2019/10/19/019
+  Time: 16:20
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; Charset=gb2312">
     <meta http-equiv="Content-Language" content="zh-CN">
@@ -30,35 +36,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-
-    <style type="text/css">
-        .foEvaluate{
-            text-align: left;
-            margin-left:16%;
-            margin-right: 16%;
-        }
-        .picDiv{
-            margin-top:20px;
-            text-align: center;
-            margin-left:16%;
-        }
-        .foDescribe{
-            margin-top:20px;
-            margin-left:16%;
-            margin-right:16%;
-            border: #1E9FFF 1px solid;
-            text-align: center;
-            clear: left;
-        }
-        .evaluateDiv{
-            margin-top: 20px;
-            margin-left: 16%;
-            margin-right:16%;
-            text-align: center;
-            clear: left;
-        }
-    </style>
-
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -70,7 +47,7 @@
             <li class="layui-nav-item"><a href="javascript:;"></a></li>
         </ul>
         <!-- 头部区域（可配合layui已有的水平导航） -->
-        <ul class="layui-nav layui-layout-left head-nav-left">
+        <ul class="layui-nav layui-layout-left head-nav-left" style="margin-top: 15px;">
             <li class="dropdown pull-right layui-nav-item">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">帮助</a>
                 <ul class="dropdown-menu">
@@ -103,52 +80,71 @@
                 <label class="btn" id="logoutButton" style="display: none;" onclick="logout();">退出登录</label>
             </div>
         </ul>
+
     </div>
 
-    <div class="layui-body">
-        <!-- 内容主体区域 -->
-        <div class="blog-main">
-            <div class="foEvaluate"><h2>评估流程：</h2></div>
-            <div>
-                <div class="picDiv">
-                    <div style="float: left"><a href="establishFile.jsp"><img src="static/images/establishFile.png"></a><br><h4><b>建立档案</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
-                    <div style="float: left"><a href="informationSurvey.jsp"><img src="static/images/informationSurvey.png"></a><br><h4><b>信息调查</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
-                    <div style="float: left"><a href="evaluation.jsp"><img src="static/images/evaluation.png"></a><br><h4><b>评估分析</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
-                    <div style="float: left"><a href="informationService.jsp"><img src="static/images/informationService.png"></a><br><h4><b>信息查询</b></h4></div>
-                </div>
-                <div class="foDescribe">
-                    <h2>适用单位</h2>
-                    <h4>境外产业园区管理单位、投资单位、规划设计与咨询单位、建设单位、运营单位等</h4>
-                </div>
-                <div class="evaluateDiv">
-                    <button class="btn btn-default" onclick="window.location='${ctx}/establishFile.jsp'">开始评估</button>
-                </div>
-            </div>
-            <div id="showPdf"></div>
+    <div class="layui-side left-nav-index" style="width: 20%;left:10%">
+        <div><h2><a class="label label-default"> 规划实施环境 </a></h2><br></div>
+        <div><h2><a class="label label-default"> 规划实施过程 </a></h2><br></div>
+        <div><h2><a class="label label-default"> 规划实施效果 </a></h2><br></div>
+        <div><h2><a class="label label-default" onclick="showQuestions()"> 规划工作与成果 </a></h2><br></div>
+    </div>
+    <div class="layui-body left-nav-body" style="left:30%;width: 70%;">
+        <div style="margin-top:3%;height: 90%;font-size: large" id="content">
 
-            <div><span class="share">立即分享</span></div>
         </div>
-        <div class="clear"></div>
+        <div>
+            <button class="btn btn-default">保存（S）</button>
+            <button class="btn btn-default">重新填写（R）</button>
+            <button class="btn btn-default">关闭（C）</button>
+            <button class="btn btn-default">提交（S）</button>
+        </div>
     </div>
 
 </div>
-<!--二维码弹层-->
-<div id="popQRCode">
-    <div id="qrcode" style="margin-left: 30px; margin-top: 8px;"></div>
-</div>
-</body>
 
-<script src="static/plug/layui/layui.js"></script>
-<script src='static/js/jquery/jquery.min.js'></script>
-<script src='static/js/pdfobject.js'></script>
-<script src="static/plug/qrcodejs/qrcode.js"></script>
-<script src="static/js/canvasjs.min.js"></script>
-<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
-<script src="https://cdn.bootcss.com/jspdf/1.3.4/jspdf.debug.js"></script>
-<!-- ECharts单文件引入 -->
-<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+</body>
 <script>
 
+    function showQuestions() {
+        var data={
+            "questions":["国家外交关系","合作国宏观政治形势与社会环境稳定程度"],
+            "options":[["全天候战略合作伙伴关系","全面战略协作伙伴关系","全面战略合作伙伴关系","全面战略伙伴关系"],["十分稳定","比较稳定","一般","不稳定"]],
+            "type":1,
+            "values":[90,90,90,80]
+        }
+
+        if(data['type']==1){//多选题
+            var htmlStr="";
+            for(var j=0;j<data['questions'].length;j++){
+                htmlStr+="<b>"+data['questions'][j]+"</b><br>";
+                for(var i=0;i<data['options'][j].length;i++){
+                    htmlStr+='<input type="checkbox" name="options'+j+'">'+data['options'][j][i];
+                }
+                htmlStr+='<br>';
+            }
+            $("#content").html(htmlStr);
+        }
+        else if(data['type']==0){//单选题
+            var htmlStr="";
+            for(var j=0;j<data['questions'].length;j++){
+                htmlStr+="<b>"+data['questions'][j]+"</b><br>";
+                for(var i=0;i<data['options'][j].length;i++){
+                    htmlStr+='<input type="radio" name="options'+j+'">'+data['options'][j][i];
+                }
+                htmlStr+='<br>';
+            }
+            $("#content").html(htmlStr);
+        }
+        else if(data['type']==2){//填空题
+            var htmlStr="";
+            for(var j=0;j<data['questions'].length;j++){
+                htmlStr+="<b>"+data['questions'][j]+"</b> &nbsp <input type='text' class='layui-input' style='width: 60%'>";
+                htmlStr+='<br>';
+            }
+            $("#content").html(htmlStr);
+        }
+    }
 
 </script>
 </html>
