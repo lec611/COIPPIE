@@ -46,7 +46,7 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left head-nav-left" style="margin-top: 15px;">
             <li class="dropdown pull-right layui-nav-item">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle" >帮助</a>
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="margin-top: -15px;">帮助</a>
                 <ul class="dropdown-menu">
                     <li><a href="#" style="color: #0C0C0C">关于软件</a></li>
                     <li class="divider"></li>
@@ -69,8 +69,6 @@
                 <button type="button" class="btn btn-default" id="establishFile"><a href="${ctx}/establishFile.jsp" style="color: black;">建立档案</a></button>
             </li>
         </ul>
-        <ul >
-        </ul>
         <ul class="layui-nav layui-layout-right head-nav-right">
             <div class="btn-group" style="margin-top:15px">
                 <button type="button" class="btn btn-default" id="loginButton"><a href="${ctx}/login.jsp">登录</a></button>
@@ -79,10 +77,6 @@
                 <label class="btn" id="logoutButton" style="display: none;" onclick="logout();">退出登录</label>
             </div>
         </ul>
-
-        <a class="small-doc-navicon" href="javascript:;" onclick="showLeftNav();">
-            <i class="fa fa-navicon"></i>
-        </a>
     </div>
 
     <div class="layui-body">

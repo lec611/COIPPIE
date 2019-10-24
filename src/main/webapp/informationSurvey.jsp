@@ -49,7 +49,7 @@
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left head-nav-left" style="margin-top: 15px;">
             <li class="dropdown pull-right layui-nav-item">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">帮助</a>
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="margin-top: -15px;">帮助</a>
                 <ul class="dropdown-menu">
                     <li><a href="#" style="color: #0C0C0C">关于软件</a></li>
                     <li class="divider"></li>
