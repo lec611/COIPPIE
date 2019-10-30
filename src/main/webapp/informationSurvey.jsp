@@ -84,16 +84,16 @@
     </div>
 
     <div class="layui-side left-nav-index" style="width: 20%;left:10%">
-        <div><h2><a class="label label-default"> 规划实施环境 </a></h2><br></div>
-        <div><h2><a class="label label-default"> 规划实施过程 </a></h2><br></div>
-        <div><h2><a class="label label-default"> 规划实施效果 </a></h2><br></div>
-        <div><h2><a class="label label-default" onclick="showQuestions()"> 规划工作与成果 </a></h2><br></div>
+        <div><h2><a class="label label-default" onclick="showQuestions('规划实施环境')"> 规划实施环境 </a></h2><br></div>
+        <div><h2><a class="label label-default" onclick="showQuestions('规划实施过程')"> 规划实施过程 </a></h2><br></div>
+        <div><h2><a class="label label-default" onclick="showQuestions('规划实施效果')"> 规划实施效果 </a></h2><br></div>
+        <div><h2><a class="label label-default" onclick="showQuestions('规划工作与成果')"> 规划工作与成果 </a></h2><br></div>
     </div>
     <div class="layui-body left-nav-body" style="left:30%;width: 70%;">
-        <div style="margin-top:3%;height: 90%;font-size: large" id="content">
+        <div style="margin-top:3%;font-size: large" id="content">
 
         </div>
-        <div>
+        <div style="margin-top:20px;">
             <button class="btn btn-default">保存（S）</button>
             <button class="btn btn-default">重新填写（R）</button>
             <button class="btn btn-default">关闭（C）</button>
@@ -105,45 +105,61 @@
 
 </body>
 <script>
+    $(function () {
+        $.ajax({
+            type: 'post',
+            url: '${ctx}/questionnaire',
+            data: {"type":"规划实施环境"},
+            dataType: 'json',
+            success: function (result) {
+                var data = eval('('+result+')');
 
-    function showQuestions() {
-        var data={
-            "questions":["国家外交关系","合作国宏观政治形势与社会环境稳定程度"],
-            "options":[["全天候战略合作伙伴关系","全面战略协作伙伴关系","全面战略合作伙伴关系","全面战略伙伴关系"],["十分稳定","比较稳定","一般","不稳定"]],
-            "type":1,
-            "values":[90,90,90,80]
-        }
+                $("#content").html(constructUI(data));
+            },
+            failure: function () {
+                alert("获取数据失败！");
+            }
+        });
 
-        if(data['type']==1){//多选题
-            var htmlStr="";
-            for(var j=0;j<data['questions'].length;j++){
-                htmlStr+="<b>"+data['questions'][j]+"</b><br>";
-                for(var i=0;i<data['options'][j].length;i++){
-                    htmlStr+='<input type="checkbox" name="options'+j+'">'+data['options'][j][i];
+    });
+
+    function constructUI(data){
+        var htmlStr="";
+        for(var i=0;i<data['module'].length;i++) {
+            htmlStr += "<div style='background-color: #007DDB;margin-top:10px;'><b>" + data['module'][i] + "</b></div>";
+            for (var j = 0; j < data['questions'][i].length; j++) {
+                if(data['optionType'][i][j]===0){
+                    htmlStr += "<b><br>" + data['questions'][i][j] + "</b><br>";
+                    for (var k = 0; k < data['options'][i][j].length; k++) {
+                        htmlStr += '<input type="radio" style="margin-left: 40px;" name="options' + j + '" value="">' + data['options'][i][j][k];
+                        if((k+1)%4==0){
+                            htmlStr+="<br>";
+                        }
+                    }
+                }else if(data['optionType'][i][j]===1){
+                    htmlStr+="<b><br>"+data['questions'][i][j]+"</b> &nbsp <input type='text' style='width: 20%;'>%";
                 }
-                htmlStr+='<br>';
+                htmlStr += '<br>';
             }
-            $("#content").html(htmlStr);
         }
-        else if(data['type']==0){//单选题
-            var htmlStr="";
-            for(var j=0;j<data['questions'].length;j++){
-                htmlStr+="<b>"+data['questions'][j]+"</b><br>";
-                for(var i=0;i<data['options'][j].length;i++){
-                    htmlStr+='<input type="radio" name="options'+j+'">'+data['options'][j][i];
-                }
-                htmlStr+='<br>';
+        return htmlStr;
+    }
+
+    function showQuestions(type) {
+        $.ajax({
+            type: 'post',
+            url: '${ctx}/questionnaire',
+            data: {"type":type},
+            dataType: 'json',
+            success: function (result) {
+                var data = eval('('+result+')');
+                $("#content").html(constructUI(data));
+            },
+            failure: function () {
+                alert("获取数据失败！");
             }
-            $("#content").html(htmlStr);
-        }
-        else if(data['type']==2){//填空题
-            var htmlStr="";
-            for(var j=0;j<data['questions'].length;j++){
-                htmlStr+="<b>"+data['questions'][j]+"</b> &nbsp <input type='text' class='layui-input' style='width: 60%'>";
-                htmlStr+='<br>';
-            }
-            $("#content").html(htmlStr);
-        }
+        });
+
     }
 
 </script>

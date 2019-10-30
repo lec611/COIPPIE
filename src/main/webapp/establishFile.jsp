@@ -99,12 +99,12 @@
         <!-- 内容主体区域 -->
         <div class="blog-main">
             <div style="margin-left:60px;width: fit-content;"><h2><label class="label label-default">园区基本信息</label></h2></div>
-            <div style="font-size:20px;border: 2px solid;margin-left:60px;margin-right:60px;padding:10px;">
+            <div style="font-size:20px;border: 2px solid;margin-left:60px;margin-right:60px;padding:10px;"><!--method="post" enctype="multipart/form-data"-->
                 园区名称<input type="text" class="inputStyle" id="parkName">   建区年份<input type="text" class="inputStyle" id="constructionYear">  所在国家<input type="text" class="inputStyle" id="country"><br>
                 规划产业<input type="text" class="inputStyle" id="planningIndustry">   规划规模<input type="text" class="inputStyle" id="planningScale"> (km²)   评估规模（规划）<input type="text" class="inputStyle" id="evaluationScale">(km²)<br>
                 实建规模<input type="text" class="inputStyle" id="constructionScale">  (km²)   投资单位<input type="text" class="inputStyle" id="investmentUnit">   建设单位<input type="text" class="inputStyle" id="constructionUnit"><br>运营单位<input type="text" class="inputStyle" id="operatingUnit"><br>
                 总体规划平面图<br>
-                <input class="btn btn-default" type="file" name="images" onchange="viewImage(this)" id="fileupload">
+                <input class="btn btn-default" type="file" name="images" onchange="viewImage(this)" id="fileupload" accept="image/*">
                 <div id="localimage" style="width: 200px;height: 200px;border:1px dashed;text-align: center;vertical-align: center"><img src="/wp-content/uploads/2014/06/download.png" class="img-thumbnail" id="preview"></div>
                 <button class="btn btn-default" name="clear" onclick="clearImage()">清除</button>
             </div>

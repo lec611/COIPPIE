@@ -58,7 +58,6 @@ public class UserInfoController {
 
         userService.updateUserInfo(name,phoneNum,sex,company,address,domain);
 
-        user = userService.getCurrentUser();
         System.out.println(user);
 
         return JSON.toJSONString("success");

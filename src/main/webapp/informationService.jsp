@@ -92,9 +92,9 @@
                     <li class="list-group-item">
                         <h3><label class="label label-default">查询条件：</label></h3>
                         <select id="year" class="layui-input">
-                            <option>园区年份</option>
+                            <option>园区名称</option>
                             <option>建区年份</option>
-                            <option>评估者姓名</option>
+                            <option>投资单位</option>
                         </select>
                     </li>
                     <li class="list-group-item">

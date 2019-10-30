@@ -84,17 +84,39 @@
         <div class="blog-main">
             <div style="text-align: left;margin-left: 80px;font-size: 20px;">
                 本软件是否达到了您的使用需求？ <br>
-                <textarea style="width: 90%"></textarea><br><br>
+                <textarea style="width: 90%" id="demand"></textarea><br><br>
                 您认为本软件值得优化的地方有：<br>
-                <textarea style="width: 90%"></textarea><br><br>
+                <textarea style="width: 90%" id="improvement"></textarea><br><br>
                 您对中国境外产业园区高质量发展的建议有: <br>
-                <textarea style="width: 90%"></textarea><br><br>
-                <div style="text-align: center;">
-                    <button class="btn btn-default">提交（S）</button>
+                <textarea style="width: 90%" id="suggestion"></textarea><br><br>
+                <div>
+                    <button class="btn btn-default" style="margin-left: 40%" onclick="submit()">提交（S）</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </body>
+<script>
+    function submit() {
+        var demandContent=document.getElementById("demand").value;//$("#demand").val();
+        var improvementContent=document.getElementById("improvement").value;
+        var suggestionContent=document.getElementById("suggestion").value;
+        if(demandContent==""&&improvementContent==""&&suggestionContent==""){
+            alert("请输入反馈内容！");
+        }else{
+            $.ajax({
+                type:'post',
+                url:'${ctx}/feedback/insert',
+                data:{"rq1":demandContent,"rq2":improvementContent,"rq3":suggestionContent},
+                dataType:'json',
+                success:function () {
+                    alert("提交成功！");
+                }
+            });
+        }
+
+    }
+
+</script>
 </html>
