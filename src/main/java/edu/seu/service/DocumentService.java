@@ -18,8 +18,39 @@ public class DocumentService {
     @Autowired
     private DocumentDao documentDao;
 
+    private String currentPark;
+    private String currentYear;
+    private String currentInvest;
+
+    public String getCurrentPark() {
+        return currentPark;
+    }
+
+    public void setCurrentPark(String currentPark) {
+        this.currentPark = currentPark;
+    }
+
+    public String getCurrentYear() {
+        return currentYear;
+    }
+
+    public void setCurrentYear(String currentYear) {
+        this.currentYear = currentYear;
+    }
+
+    public String getCurrentInvest() {
+        return currentInvest;
+    }
+
+    public void setCurrentInvest(String currentInvest) {
+        this.currentInvest = currentInvest;
+    }
+
     public void insertDocument(Document document){
         documentDao.persist(document);
+        setCurrentPark(document.getPark());
+        setCurrentYear(document.getYear().substring(0,4));
+        setCurrentInvest(document.getInvest());
     }
 
     public List<Document> showDocument(String option,String park_year_invest,String userName) throws COIPPIEExceptions {

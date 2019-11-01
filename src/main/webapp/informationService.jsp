@@ -52,7 +52,7 @@
             <li class="dropdown pull-right layui-nav-item">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="margin-top: -15px;">帮助</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#" style="color: #0C0C0C">关于软件</a></li>h
+                    <li><a href="#" style="color: #0C0C0C">关于软件</a></li>
                     <li class="divider"></li>
                     <li><a href="#" style="color: #0C0C0C">使用说明</a></li>
                 </ul>
@@ -84,33 +84,94 @@
 
     </div>
 
-    <div class="layui-body">
+    <div class="layui-body left-nav-body">
         <!-- 内容主体区域 -->
         <div class="blog-main">
-            <div style="margin: 30px;">
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <h3><label class="label label-default">查询条件：</label></h3>
-                        <select id="year" class="layui-input">
-                            <option>园区名称</option>
-                            <option>建区年份</option>
-                            <option>投资单位</option>
-                        </select>
-                    </li>
-                    <li class="list-group-item">
-                        <h3><label class="label label-default">输入查询：</label></h3>
-                        <input type="text" id="inputTxt" placeholder="输入查询" class="layui-input">
-                    </li>
-                </ul>
+            <!-- 左侧搜索查询界面 -->
+            <div class="blog-main-left">
+                <div style="margin: 30px;">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <h3><label class="label label-default">查询条件：</label></h3>
+                            <select id="condition" class="layui-input">
+                                <option>园区名称</option>
+                                <option>建区年份</option>
+                                <option>投资单位</option>
+                            </select>
+                        </li>
+                        <li class="list-group-item" style="margin-top: 8%">
+                            <h3><label class="label label-default">输入查询：</label></h3>
+                            <input type="text" id="inputTxt" placeholder="输入查询" class="layui-input">
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div style="text-align: center;margin-bottom: 0px;">
-                <button class="btn btn-default">点击查询（S）</button>
-                <button class="btn btn-default">下载报告（D）</button>
-                <button class="btn btn-default">关闭（C）</button>
+            <!--右侧搜索结果展示界面-->
+            <div class="blog-main-right">
+                <div style="margin-top: 30px;">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <h3><label class="label label-default">查询结果：</label></h3>
+                            <table class="table" id="queryResultTable">
+                                <td>园区名称</td><td>建区年份</td><td>投资单位</td><td></td>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </div>
+        <div style="text-align: center;"><!--margin-bottom: 0px;margin-top:-160px;-->
+            <button class="btn btn-default" id="queryButton" onclick="doClickQuery()">点击查询（S）</button>
+            <button class="btn btn-default" style="margin-left: 6%">关闭（C）</button>
         </div>
     </div>
 
 </div>
+<script>
+    function doClickQuery(){
+        var resultTable = document.getElementById('queryResultTable');
+        // 删除所有行，不删除标题行
+        var rowCount = resultTable.rows.length; // 获得一共多少行，因为不删除标题，所以索引从 1 开始
+        for (var i = 1; i < rowCount; i++) {
+            resultTable.deleteRow(1); // 因为删除一行以后下面的行会顶上来，所以一直删除第一行即可
+        }
+        //查询条件
+        var Obj = document.getElementById("condition");
+        var index = Obj.selectedIndex;
+        var condition = Obj.options[index].text;
+        if(condition == "园区名称"){
+            condition = "park";
+        }else if(condition == "建区年份"){
+            condition = "year";
+        }else if(condition == "投资单位"){
+            condition = "invest";
+        }
+        //查询关键字
+        var key = document.getElementById("inputTxt").value;
+        $.ajax({
+            type: 'get',
+            url: '${ctx}/answer/query',
+            data: {"condition": condition,"key": key},
+            dataType: "json",
+            success: function (data) {
+                if (data != '[]') {
+                    var objs = eval(data); // 解析JSON
+                    var count = 1;
+                    for (var i = 0; i < objs.length; i++) { // 循环对象
+                        var queryObj = objs[i];
+                        var row = resultTable.insertRow(count++); // 插入一行rows是一个数组，索引从0开始
+                        row.insertCell(0).innerHTML = "&nbsp;" + queryObj.park; // insertCell插入列，从0开始
+                        row.insertCell(1).innerHTML = "&nbsp;" + queryObj.year;
+                        row.insertCell(2).innerHTML = "&nbsp;" + queryObj.invest;
+                        var buttonHTML = "<button class=\"layui-btn layui-btn-normal layui-btn-xs\" onclick=\"\" style=\"margin-top: 3px\">下载评估报告 </button>";
+                        row.insertCell(3).innerHTML = "&nbsp;" + buttonHTML;
+                    }
+                } else {
+                    alert("未查询到结果！");
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>
