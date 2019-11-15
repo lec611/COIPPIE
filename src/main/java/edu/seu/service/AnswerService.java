@@ -2,14 +2,12 @@ package edu.seu.service;
 
 import edu.seu.base.CodeEnum;
 import edu.seu.dao.AnswerDao;
-import edu.seu.exceptions.COIPPIEExceptions;
+import edu.seu.exceptions.OICPMPIEExceptions;
 import edu.seu.model.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static sun.plugin.javascript.navig.JSType.Document;
 
 /**
  * @author wjx
@@ -154,7 +152,7 @@ public class AnswerService {
     /**
      *根据关键字匹配评估条目
      */
-    public List<Answer> queryByCondition(String condition,String key) throws COIPPIEExceptions {
+    public List<Answer> queryByCondition(String condition,String key) throws OICPMPIEExceptions {
         String name = userService.getCurrentUser().getName();
         List<Answer> answerList = null;
         if(condition.equals("park")){
@@ -165,7 +163,7 @@ public class AnswerService {
             answerList = answerDao.queryByInvest(name,key);
         }
         if(answerList == null){
-            throw new COIPPIEExceptions(CodeEnum.DOCUMENT_ERROR,"未找到相关结果");
+            throw new OICPMPIEExceptions(CodeEnum.DOCUMENT_ERROR,"未找到相关结果");
         }
         return answerList;
     }

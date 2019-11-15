@@ -5,9 +5,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import edu.seu.base.CodeEnum;
 import edu.seu.base.CommonResponse;
-import edu.seu.exceptions.COIPPIEExceptions;
+import edu.seu.exceptions.OICPMPIEExceptions;
 import edu.seu.model.Document;
-import edu.seu.model.User;
 import edu.seu.service.DocumentService;
 import edu.seu.service.UserService;
 import org.slf4j.Logger;
@@ -38,8 +37,6 @@ public class DocumentController {
 
     @Autowired
     private UserService userService;
-
-
 
     @ResponseBody
     @RequestMapping("/insert")
@@ -115,7 +112,7 @@ public class DocumentController {
                 array.add(object);
             }
             return JSON.toJSONString(array.toString());
-        } catch (COIPPIEExceptions e){
+        } catch (OICPMPIEExceptions e){
             LOGGER.info(e.getMessage());
             return new CommonResponse(e.getCodeEnum().getValue(),e.getMessage()).toJSONString();
         } catch (Exception e){

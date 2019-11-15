@@ -15,7 +15,7 @@
     <meta http-equiv="Content-Type" content="text/html; Charset=gb2312">
     <meta http-equiv="Content-Language" content="zh-CN">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <title>COIPPIE</title>
+    <title>OICPMPIE</title>
     <link rel="stylesheet" href="static/css/layui.css">
     <!--font-awesome-->
     <link href="static//css/font-awesome.min.css" rel="stylesheet"/>
@@ -53,7 +53,7 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header position: absolute;">
         <a href="${ctx}/index.jsp">
-            <div class="layui-logo doc-logo" style="font-weight: bold">COIPPIE</div>
+            <div class="layui-logo doc-logo" style="font-weight: bold">OICPMPIE</div>
         </a>
         <ul class="layui-nav layui-layout-left small-head-nav-left">
             <li class="layui-nav-item"><a href="javascript:;"></a></li>

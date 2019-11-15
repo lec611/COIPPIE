@@ -6,7 +6,7 @@ import edu.seu.async.EventType;
 import edu.seu.base.CodeEnum;
 import edu.seu.base.CommonResponse;
 import edu.seu.base.Pagination;
-import edu.seu.exceptions.COIPPIEExceptions;
+import edu.seu.exceptions.OICPMPIEExceptions;
 import edu.seu.model.User;
 import edu.seu.service.CaptchaService;
 import edu.seu.service.EmailService;
@@ -54,7 +54,7 @@ public class LoginController {
             String ticket = userService.register(user, oldEmail, codeCaptcha, emailCaptcha, oldCodeCaptcha, oldEmailCaptcha);
             addCookie(user.getName().trim(),ticket, response);
             return new CommonResponse(CodeEnum.SUCCESS.getValue(), "注册成功").toJSONString();
-        } catch (COIPPIEExceptions e) {
+        } catch (OICPMPIEExceptions e) {
             LOGGER.info(e.getMessage() + " parameter:user={}, oldEmail={}, codeCaptcha={}, emailCaptcha={}, oldCodeCaptcha={}, oldEmailCaptcha={}", user,
                     request.getSession().getAttribute("email"),
                     codeCaptcha, emailCaptcha, request.getSession().getAttribute("codeCaptcha"),
@@ -82,7 +82,7 @@ public class LoginController {
             request.getSession().setAttribute("ticket",ticket);
             request.getSession().setAttribute("name",nameEmail);
             return new CommonResponse(CodeEnum.SUCCESS.getValue(), "登录成功").toJSONString();
-        } catch (COIPPIEExceptions e) {
+        } catch (OICPMPIEExceptions e) {
             LOGGER.info(e.getMessage() + " parameter:nameEmail={}, password={}, codeCaptcha={}, oldCodeCaptcha={}",
                     nameEmail, password, codeCaptcha, request.getSession().getAttribute("codeCaptcha"));
             return new CommonResponse(e.getCodeEnum().getValue(), e.getMessage()).toJSONString();
@@ -140,7 +140,7 @@ public class LoginController {
             String oldCodeCaptcha = (String) request.getSession().getAttribute("codeCaptcha");
             userService.modifyPassword(email, newPassword, confirmPassword, codeCaptcha, oldCodeCaptcha);
             return new CommonResponse(CodeEnum.SUCCESS.getValue(), "修改密码成功").toJSONString();
-        } catch (COIPPIEExceptions e) {
+        } catch (OICPMPIEExceptions e) {
             LOGGER.info(e.getMessage() + " parameter:newPassword={}, confirmPassword={}, codeCaptcha={}, oldCodeCaptcha={}",
                     newPassword, confirmPassword, codeCaptcha, request.getSession().getAttribute("codeCaptcha"));
             return new CommonResponse(e.getCodeEnum().getValue(), e.getMessage()).toJSONString();
@@ -167,7 +167,7 @@ public class LoginController {
             EventModel eventModel = new EventModel(EventType.EMAIL, userService.buildEmailCaptcha(email, emailCaptcha, request));
             eventConsumer.submit(eventModel);
             return new CommonResponse(CodeEnum.SUCCESS.getValue(), "邮箱验证码发送成功").toJSONString();
-        } catch (COIPPIEExceptions e) {
+        } catch (OICPMPIEExceptions e) {
             LOGGER.info(e.getMessage() + " parameter:email={},codeCaptcha={}, oldCodeCaptcha={}", email, codeCaptcha,
                     request.getSession().getAttribute("codeCaptcha"));
             return new CommonResponse(e.getCodeEnum().getValue(), e.getMessage()).toJSONString();
@@ -187,7 +187,7 @@ public class LoginController {
             String oldEmailCaptcha = (String)request.getSession().getAttribute("emailCaptcha");
             userService.checkBeforeFindPassword(codeCaptcha, oldCodeCaptcha, emailCaptcha, oldEmailCaptcha);
             return new CommonResponse(CodeEnum.SUCCESS.getValue(), "找回密码成功").toJSONString();
-        }catch (COIPPIEExceptions e) {
+        }catch (OICPMPIEExceptions e) {
             LOGGER.info(e.getMessage() + " parameter:email={}, codeCaptcha={}, emailCaptcha={}, oldCodeCaptcha={}, oldEmailCaptcha={}",
                     email, codeCaptcha, emailCaptcha, request.getSession().getAttribute("codeCaptcha"),
                     request.getSession().getAttribute("emailCaptcha"));
@@ -208,7 +208,7 @@ public class LoginController {
             String oldCodeCaptcha = (String) request.getSession().getAttribute("codeCaptcha");
             userService.updatePassword(oldPassword, newPassword, codeCaptcha, oldCodeCaptcha, ticket);
             return new CommonResponse(CodeEnum.SUCCESS.getValue(), "修改密码成功").toJSONString();
-        } catch (COIPPIEExceptions e) {
+        } catch (OICPMPIEExceptions e) {
             LOGGER.info(e.getMessage() + " parameter:oldPassword={}, newPassword={}, codeCaptcha={}, oldCodeCaptcha={}",
                     oldPassword, newPassword, codeCaptcha, request.getSession().getAttribute("codeCaptcha"));
             return new CommonResponse(e.getCodeEnum().getValue(), e.getMessage()).toJSONString();

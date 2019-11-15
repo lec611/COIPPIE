@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import edu.seu.base.CodeEnum;
 import edu.seu.base.CommonResponse;
-import edu.seu.exceptions.COIPPIEExceptions;
 import edu.seu.model.Feedback;
 import edu.seu.model.User;
 import edu.seu.service.FeedbackService;
@@ -41,6 +40,9 @@ public class FeedbackController {
     public String insert(HttpServletRequest request){
         User user = userService.getCurrentUser();
         Feedback feedback = new Feedback();
+        if(user==null){
+            return JSON.toJSONString("failure");
+        }
         feedback.setUser(user.getName());
 
         feedback.setRq1(request.getParameter("rq1"));

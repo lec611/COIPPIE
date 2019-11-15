@@ -2,7 +2,7 @@ package edu.seu.service;
 
 import edu.seu.base.CodeEnum;
 import edu.seu.dao.DocumentDao;
-import edu.seu.exceptions.COIPPIEExceptions;
+import edu.seu.exceptions.OICPMPIEExceptions;
 import edu.seu.model.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,11 +49,11 @@ public class DocumentService {
     public void insertDocument(Document document){
         documentDao.persist(document);
         setCurrentPark(document.getPark());
-        setCurrentYear(document.getYear().substring(0,4));
+        setCurrentYear(document.getYear());
         setCurrentInvest(document.getInvest());
     }
 
-    public List<Document> showDocument(String option,String park_year_invest,String userName) throws COIPPIEExceptions {
+    public List<Document> showDocument(String option,String park_year_invest,String userName) throws OICPMPIEExceptions {
         List<Document> documents = null;
         if(option.equals("park")){
             documents = documentDao.showByPark(userName,park_year_invest);
@@ -66,7 +66,7 @@ public class DocumentService {
         }
 
         if(documents == null){
-            throw new COIPPIEExceptions(CodeEnum.DOCUMENT_ERROR,"未找到相关结果");
+            throw new OICPMPIEExceptions(CodeEnum.DOCUMENT_ERROR,"未找到相关结果");
         }
 
         return documents;

@@ -2,7 +2,7 @@ package edu.seu.exceptions;
 
 import edu.seu.base.CodeEnum;
 
-public class COIPPIEExceptions extends Exception{
+public class OICPMPIEExceptions extends Exception{
     CodeEnum codeEnum;
 
     public CodeEnum getCodeEnum(){return codeEnum;}
@@ -10,14 +10,14 @@ public class COIPPIEExceptions extends Exception{
     public void setCodeEnum(CodeEnum codeEnum){
         this.codeEnum = codeEnum;
     }
-    public COIPPIEExceptions(){
+    public OICPMPIEExceptions(){
     }
-    public COIPPIEExceptions(CodeEnum codeEnum, String msg)
+    public OICPMPIEExceptions(CodeEnum codeEnum, String msg)
     {
         super(msg);
         this.codeEnum = codeEnum;
     }
-    public COIPPIEExceptions(String msg)
+    public OICPMPIEExceptions(String msg)
     {
         super(msg);
     }

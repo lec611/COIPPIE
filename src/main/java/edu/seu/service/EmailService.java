@@ -1,6 +1,6 @@
 package edu.seu.service;
 
-import edu.seu.exceptions.COIPPIEExceptions;
+import edu.seu.exceptions.OICPMPIEExceptions;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,18 +53,18 @@ public class EmailService implements InitializingBean {
 
     }
 
-    private void checkBeforeSendEmail(Map<String, Object> map) throws COIPPIEExceptions{
+    private void checkBeforeSendEmail(Map<String, Object> map) throws OICPMPIEExceptions {
         if (map == null) {
-            throw new COIPPIEExceptions("邮件参数不能为空！");
+            throw new OICPMPIEExceptions("邮件参数不能为空！");
         }
         if (StringUtils.isBlank((String)map.get("to"))) {
-            throw new COIPPIEExceptions("邮件地址不能为空！");
+            throw new OICPMPIEExceptions("邮件地址不能为空！");
         }
         if (StringUtils.isBlank((String)map.get("subject"))) {
-            throw new COIPPIEExceptions("邮件名不能为空！");
+            throw new OICPMPIEExceptions("邮件名不能为空！");
         }
         if (StringUtils.isBlank((String)map.get("text"))) {
-            throw new COIPPIEExceptions("邮件正文不能为空！");
+            throw new OICPMPIEExceptions("邮件正文不能为空！");
         }
     }
 

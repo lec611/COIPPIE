@@ -15,7 +15,7 @@
     <meta http-equiv="Content-Type" content="text/html; Charset=gb2312">
     <meta http-equiv="Content-Language" content="zh-CN">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <title>COIPPIE</title>
+    <title>OICPMPIE</title>
     <link rel="stylesheet" href="static/css/layui.css">
     <!--font-awesome-->
     <link href="static//css/font-awesome.min.css" rel="stylesheet"/>
@@ -42,7 +42,7 @@
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header position: absolute;">
         <a href="${ctx}/index.jsp">
-            <div class="layui-logo doc-logo" style="font-weight: bold">COIPPIE</div>
+            <div class="layui-logo doc-logo" style="font-weight: bold">OICPMPIE</div>
         </a>
         <ul class="layui-nav layui-layout-left small-head-nav-left">
             <li class="layui-nav-item"><a href="javascript:;"></a></li>
@@ -163,7 +163,7 @@
                         row.insertCell(0).innerHTML = "&nbsp;" + queryObj.park; // insertCell插入列，从0开始
                         row.insertCell(1).innerHTML = "&nbsp;" + queryObj.year;
                         row.insertCell(2).innerHTML = "&nbsp;" + queryObj.invest;
-                        var buttonHTML = "<button class=\"layui-btn layui-btn-normal layui-btn-xs\" onclick=\"\" style=\"margin-top: 3px\">下载评估报告 </button>";
+                        var buttonHTML = "<button class=\"layui-btn layui-btn-normal layui-btn-xs\" onclick=\"downloadReport("+queryObj.user+queryObj.park+queryObj.year+queryObj.invest")\" style=\"margin-top: 3px\">下载评估报告 </button>";
                         row.insertCell(3).innerHTML = "&nbsp;" + buttonHTML;
                     }
                 } else {
@@ -172,6 +172,19 @@
             }
         });
     }
+
+    function downloadReport(user,park,year,invest){
+        $.ajax({
+            type: 'get',
+            url: '${ctx}/answer/service',
+            data: {"user": user,"park": park,"year": year,"invest": invest},
+            dataType: "json",
+            success: function (data) {
+                alert("success");
+            }
+        });
+    }
+
 </script>
 </body>
 </html>

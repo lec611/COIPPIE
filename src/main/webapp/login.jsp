@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>COIPPIE - 登陆页面</title>
+    <title>OICPMPIE - 登陆页面</title>
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4,initial-scale=0.8,target-densitydpi=low-dpi"/>
@@ -34,7 +34,7 @@
 <body class="login-bg">
 
 <div class="login layui-anim layui-anim-up">
-    <div class="message">COIPPIE - 登录</div>
+    <div class="message">OICPMPIE - 登录</div>
     <div id="darkbannerwrap"></div>
     <form class="layui-form" action="" method="post">
         <input type="text" name="nameEmail" id="nameEmail" placeholder="请输入用户名/邮箱"
