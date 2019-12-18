@@ -58,25 +58,33 @@
                 </ul>
             </li>
             <li class="dropdown pull-right layui-nav-item">
-                <button type="button" class="btn btn-default" id="Feedback"><a href="${ctx}/feedback.jsp" style="color: black;">意见反馈</a></button>
+                <button type="button" class="btn btn-default" id="Feedback"><a href="${ctx}/feedback.jsp"
+                                                                               style="color: black;">意见反馈</a></button>
             </li>
             <li class="dropdown pull-right layui-nav-item">
-                <button type="button" class="btn btn-default" id="informationService"><a href="${ctx}/informationService.jsp" style="color: black;">信息查询</a></button>
+                <button type="button" class="btn btn-default" id="informationService"><a
+                        href="${ctx}/informationService.jsp" style="color: black;">信息查询</a></button>
             </li>
             <li class="dropdown pull-right layui-nav-item">
-                <button type="button" class="btn btn-default" id="evaluation"><a href="${ctx}/evaluation.jsp" style="color: black;">评估分析</a></button>
+                <button type="button" class="btn btn-default" id="evaluation"><a href="${ctx}/evaluation.jsp"
+                                                                                 style="color: black;">评估分析</a></button>
             </li>
             <li class="dropdown pull-right layui-nav-item">
-                <button type="button" class="btn btn-default" id="informationSurvey"><a href="${ctx}/informationSurvey.jsp" style="color: black;">信息调查</a></button>
+                <button type="button" class="btn btn-default" id="informationSurvey"><a
+                        href="${ctx}/informationSurvey.jsp" style="color: black;">信息调查</a></button>
             </li>
-            <li class="dropdown pull-right layui-nav-item" >
-                <button type="button" class="btn btn-default" id="establishFile"><a href="${ctx}/establishFile.jsp" style="color: black;">建立档案</a></button>
+            <li class="dropdown pull-right layui-nav-item">
+                <button type="button" class="btn btn-default" id="establishFile"><a href="${ctx}/establishFile.jsp"
+                                                                                    style="color: black;">建立档案</a>
+                </button>
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right head-nav-right">
             <div class="btn-group" style="margin-top:15px">
-                <button type="button" class="btn btn-default" id="loginButton"><a href="${ctx}/login.jsp">登录</a></button>
-                <button type="button" class="btn btn-default" id="registerButton"><a href="${ctx}/register.jsp">注册</a></button>
+                <button type="button" class="btn btn-default" id="loginButton"><a href="${ctx}/login.jsp">登录</a>
+                </button>
+                <button type="button" class="btn btn-default" id="registerButton"><a href="${ctx}/register.jsp">注册</a>
+                </button>
                 <label class="btn" style="display:none" id="userInfoButton" href="${ctx}/userInfo.jsp"></label>
                 <label class="btn" id="logoutButton" style="display: none;" onclick="logout();">退出登录</label>
             </div>
@@ -113,7 +121,10 @@
                         <li class="list-group-item">
                             <h3><label class="label label-default">查询结果：</label></h3>
                             <table class="table" id="queryResultTable">
-                                <td>园区名称</td><td>建区年份</td><td>投资单位</td><td></td>
+                                <td>园区名称</td>
+                                <td>建区年份</td>
+                                <td>投资单位</td>
+                                <td></td>
                             </table>
                         </li>
                     </ul>
@@ -128,7 +139,7 @@
 
 </div>
 <script>
-    function doClickQuery(){
+    function doClickQuery() {
         var resultTable = document.getElementById('queryResultTable');
         // 删除所有行，不删除标题行
         var rowCount = resultTable.rows.length; // 获得一共多少行，因为不删除标题，所以索引从 1 开始
@@ -139,11 +150,11 @@
         var Obj = document.getElementById("condition");
         var index = Obj.selectedIndex;
         var condition = Obj.options[index].text;
-        if(condition == "园区名称"){
+        if (condition == "园区名称") {
             condition = "park";
-        }else if(condition == "建区年份"){
+        } else if (condition == "建区年份") {
             condition = "year";
-        }else if(condition == "投资单位"){
+        } else if (condition == "投资单位") {
             condition = "invest";
         }
         //查询关键字
@@ -151,10 +162,11 @@
         $.ajax({
             type: 'get',
             url: '${ctx}/answer/query',
-            data: {"condition": condition,"key": key},
+            data: {"condition": condition, "key": key},
             dataType: "json",
             success: function (data) {
-                if (data != '[]') {
+                var re = /user/;
+                if (re.test(data)) {
                     var objs = eval(data); // 解析JSON
                     var count = 1;
                     for (var i = 0; i < objs.length; i++) { // 循环对象
@@ -163,24 +175,31 @@
                         row.insertCell(0).innerHTML = "&nbsp;" + queryObj.park; // insertCell插入列，从0开始
                         row.insertCell(1).innerHTML = "&nbsp;" + queryObj.year;
                         row.insertCell(2).innerHTML = "&nbsp;" + queryObj.invest;
-                        var buttonHTML = "<button class=\"layui-btn layui-btn-normal layui-btn-xs\" onclick=\"downloadReport("+queryObj.user+queryObj.park+queryObj.year+queryObj.invest")\" style=\"margin-top: 3px\">下载评估报告 </button>";
+                        var buttonHTML = "<button class=\"layui-btn layui-btn-normal layui-btn-xs\" onclick=\"downloadReport('" + queryObj.user + "','" + queryObj.park + "','" + queryObj.year + "','" + queryObj.invest + "')\" style=\"margin-top: 3px\">下载评估报告 </button>";
                         row.insertCell(3).innerHTML = "&nbsp;" + buttonHTML;
                     }
-                } else {
+                } else if (data == '[]'){
                     alert("未查询到结果！");
+                } else {
+                    alert("请先登录！");
                 }
             }
         });
     }
 
-    function downloadReport(user,park,year,invest){
+    function downloadReport(user, park, year, invest) {
         $.ajax({
-            type: 'get',
+            type: 'post',
             url: '${ctx}/answer/service',
-            data: {"user": user,"park": park,"year": year,"invest": invest},
+            data: {"user": user, "park": park, "year": year, "invest": invest},
             dataType: "json",
             success: function (data) {
-                alert("success");
+                alert(data);
+                //此处是去除双引号用的
+                //var reg = new RegExp('"',"g");
+                //var str = data.replace(reg,"");
+                //修改a标签的路径，变为自己的数据（data是后台返回的数据，数据就是新的链接）
+                //$('#url').attr('href',"${ctx}/answer/service");
             }
         });
     }

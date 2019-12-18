@@ -154,6 +154,10 @@ public class AnswerService {
      */
     public List<Answer> queryByCondition(String condition,String key) throws OICPMPIEExceptions {
         String name = userService.getCurrentUser().getName();
+        if(name == null){
+            throw new OICPMPIEExceptions(CodeEnum.USER_ERROR,"用户未登录");
+        }
+
         List<Answer> answerList = null;
         if(condition.equals("park")){
             answerList = answerDao.queryByPark(name,key);
@@ -161,9 +165,6 @@ public class AnswerService {
             answerList = answerDao.queryByYear(name,key.substring(0,4));
         }else if (condition.equals("invest")){
             answerList = answerDao.queryByInvest(name,key);
-        }
-        if(answerList == null){
-            throw new OICPMPIEExceptions(CodeEnum.DOCUMENT_ERROR,"未找到相关结果");
         }
         return answerList;
     }
