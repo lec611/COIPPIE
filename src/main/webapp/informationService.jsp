@@ -195,6 +195,7 @@
             dataType: "json",
             success: function (data) {
                 alert(data);
+                download();
                 //此处是去除双引号用的
                 //var reg = new RegExp('"',"g");
                 //var str = data.replace(reg,"");
@@ -202,6 +203,10 @@
                 //$('#url').attr('href',"${ctx}/answer/service");
             }
         });
+
+    }
+    function download() {
+        window.location.replace("/answer/download");
     }
 
 </script>

@@ -26,7 +26,7 @@ public class Html2PDF {
         // 第四步：加载一个模板，创建一个模板对象。
         Template template = configuration.getTemplate("hello.ftl");
         // 第五步：创建一个模板使用的数据集，可以是pojo也可以是map。一般是Map。
-        Map dataModel = new HashMap<>();
+        Map<String,String> dataModel = new HashMap();
         //向数据集中添加数据
         dataModel.put("title", "课堂秩序");
         // 第六步：创建一个Writer对象，解决静态页面中文乱码问题，指定生成的文件名。

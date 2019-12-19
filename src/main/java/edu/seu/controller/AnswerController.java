@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -87,22 +88,24 @@ public class AnswerController {
             String realPath = context.getRealPath("/ftl");
             //生成PDF
             Html2PDF pdf = new Html2PDF();
-            realPath = pdf.createPdf(realPath);
-            //获取生成的PDF
-            File file = new File(realPath);
-
-            response.setContentType("application/pdf");
-            response.addHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
-
-            ServletOutputStream out = response.getOutputStream();
-            FileInputStream ips = new FileInputStream(file);
-            //读取文件流
-            int len = 0;
-            byte[] buffer = new byte[1024 * 10];
-            while ((len = ips.read(buffer)) != -1){
-                out.write(buffer,0,len);
-            }
-            out.flush();
+//            realPath =
+            pdf.createPdf(realPath);
+//            System.out.println(realPath);
+//            //获取生成的PDF
+//            File file = new File(realPath);
+//            String name = file.getName();
+//            response.setContentType("application/pdf");
+//            response.addHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+//
+//            ServletOutputStream out = response.getOutputStream();
+//            FileInputStream ips = new FileInputStream(file);
+//            //读取文件流
+//            int len = 0;
+//            byte[] buffer = new byte[1024 * 10];
+//            while ((len = ips.read(buffer)) != -1){
+//                out.write(buffer,0,len);
+//            }
+//            out.flush();
 
             return JSON.toJSONString("success");
 
@@ -116,6 +119,31 @@ public class AnswerController {
             LOGGER.error("/answer/service", e);
             return null;
             //return new ResponseEntity<byte[]>(HttpStatus.NO_CONTENT);
+        }
+    }
+    @ResponseBody
+    @RequestMapping("/download")
+    public void fileDownload(HttpServletRequest request,HttpServletResponse response)
+    {
+        try{
+            ServletContext context = request.getSession().getServletContext();
+            String realPath = context.getRealPath("/ftl");
+            File file = new File(realPath + "/hello.pdf");
+            response.setContentType("application/pdf");
+            response.addHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
+            ServletOutputStream out = response.getOutputStream();
+            FileInputStream ips = new FileInputStream(file);
+            //读取文件流
+            int len = 0;
+            byte[] buffer = new byte[1024 * 10];
+            while ((len = ips.read(buffer)) != -1){
+                out.write(buffer,0,len);
+            }
+            out.flush();
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
