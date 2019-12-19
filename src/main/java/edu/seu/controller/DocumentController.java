@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -40,21 +41,22 @@ public class DocumentController {
 
     @ResponseBody
     @RequestMapping("/insert")
-    public String insert(MultipartFile imageFile,HttpServletRequest request){
+    public void insert(MultipartFile imageFile, HttpServletRequest request, HttpServletResponse response){
         Document document = new Document();
-        document.setPark(request.getParameter("park"));
-        document.setYear(request.getParameter("year").substring(0,4));
-        document.setInvest(request.getParameter("invest"));
-        document.setNation(request.getParameter("nation"));
-        document.setIndustry(request.getParameter("industry"));
-        document.setSchedule(request.getParameter("schedule"));
-        document.setAssess(request.getParameter("assess"));
-        document.setBuild(request.getParameter("build"));
-        document.setConstruct(request.getParameter("construct"));
-        document.setOperate(request.getParameter("operate"));
-        document.setUser(request.getParameter("user"));
-        document.setCareer(request.getParameter("career"));
-        document.setCompany(request.getParameter("company"));
+        document.setPark(request.getParameter("parkName"));
+        System.out.println(request.getParameter("parkName"));
+        document.setYear(request.getParameter("constructionYear"));
+        document.setInvest(request.getParameter("investmentUnit"));
+        document.setNation(request.getParameter("country"));
+        document.setIndustry(request.getParameter("planningIndustry"));
+        document.setSchedule(request.getParameter("planningScale"));
+        document.setAssess(request.getParameter("evaluationScale"));
+        document.setBuild(request.getParameter("constructionScale"));
+        document.setConstruct(request.getParameter("constructionUnit"));
+        document.setOperate(request.getParameter("operatingUnit"));
+        document.setUser(request.getParameter("personName"));
+        document.setCareer(request.getParameter("job"));
+        document.setCompany(request.getParameter("workAddress"));
         document.setPhone(request.getParameter("phone"));
         document.setEmail(request.getParameter("email"));
         document.setAddress(request.getParameter("address"));
@@ -91,7 +93,12 @@ public class DocumentController {
         }
 
         documentService.insertDocument(document);
-        return JSON.toJSONString("success");
+        try {
+            response.sendRedirect("/establishFile.jsp");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // return JSON.toJSONString("success");
     }
 
     @ResponseBody
