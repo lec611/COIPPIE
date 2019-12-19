@@ -110,7 +110,7 @@
     $(function () {
         $.ajax({
             type: 'post',
-            url: '${ctx}/questionnaire',
+            url: '${ctx}/questionnaire/questionnaire',
             data: {"type":"规划实施环境"},
             dataType: 'json',
             success: function (result) {
