@@ -9,21 +9,19 @@ import edu.seu.exceptions.OICPMPIEExceptions;
 import edu.seu.model.Answer;
 import edu.seu.service.AnswerService;
 import edu.seu.util.Html2PDF;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
-import java.net.URLEncoder;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
 /**
@@ -77,33 +75,41 @@ public class AnswerController {
      */
     @ResponseBody
     @RequestMapping("/service")
-    public ResponseEntity<byte[]> service(HttpServletRequest request) {
+    public String service(HttpServletRequest request, HttpServletResponse response) {
         String user = request.getParameter("user");
         String park = request.getParameter("park");
         String year = request.getParameter("year");
         String invest = request.getParameter("invest");
 
         try {
-
-            String realPath = "D:\\JetBrains\\MavenWorkspace\\OICPMPIE\\src\\main\\webapp\\WEB-INF\\ftl";
+            //获取本地地址，用于生成PDF文档
+            ServletContext context = request.getSession().getServletContext();
+            String realPath = context.getRealPath("/ftl");
+            //生成PDF
             Html2PDF pdf = new Html2PDF();
             realPath = pdf.createPdf(realPath);
-
-            System.out.println("1:"+realPath);
-
+            //获取生成的PDF
             File file = new File(realPath);
-            System.out.println(file.getName());
 
-            //return JSON.toJSONString("success");
+            response.setContentType("application/pdf");
+            response.addHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
 
-            //File file = new File(realPath);
-            HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-            httpHeaders.setContentDispositionFormData("attachment", URLEncoder.encode(file.getName(), "UTF-8"));
+            ServletOutputStream out = response.getOutputStream();
+            FileInputStream ips = new FileInputStream(file);
+            //读取文件流
+            int len = 0;
+            byte[] buffer = new byte[1024 * 10];
+            while ((len = ips.read(buffer)) != -1){
+                out.write(buffer,0,len);
+            }
+            out.flush();
 
-            System.out.println("2:"+realPath);
+            return JSON.toJSONString("success");
 
-            return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.OK);
+            //HttpHeaders httpHeaders = new HttpHeaders();
+            //httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            //httpHeaders.setContentDispositionFormData("attachment", URLEncoder.encode(file.getName(), "UTF-8"));
+            //return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.OK);
 
         } catch (Exception e) {
             LOGGER.info(e.getMessage());

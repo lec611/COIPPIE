@@ -41,7 +41,7 @@ public class Html2PDF {
         String inputFile = realPath+"/hello.html";
         String outputFile = realPath+"/hello.pdf";
         String url = new File(inputFile).toURI().toURL().toString();
-        System.out.println(url);
+
         OutputStream os = new FileOutputStream(outputFile);
         ITextRenderer renderer = new ITextRenderer();
         renderer.setDocument(url);
