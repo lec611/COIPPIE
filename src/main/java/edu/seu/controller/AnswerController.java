@@ -88,37 +88,14 @@ public class AnswerController {
             String realPath = context.getRealPath("/ftl");
             //生成PDF
             Html2PDF pdf = new Html2PDF();
-//            realPath =
             pdf.createPdf(realPath);
-//            System.out.println(realPath);
-//            //获取生成的PDF
-//            File file = new File(realPath);
-//            String name = file.getName();
-//            response.setContentType("application/pdf");
-//            response.addHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
-//
-//            ServletOutputStream out = response.getOutputStream();
-//            FileInputStream ips = new FileInputStream(file);
-//            //读取文件流
-//            int len = 0;
-//            byte[] buffer = new byte[1024 * 10];
-//            while ((len = ips.read(buffer)) != -1){
-//                out.write(buffer,0,len);
-//            }
-//            out.flush();
 
             return JSON.toJSONString("success");
-
-            //HttpHeaders httpHeaders = new HttpHeaders();
-            //httpHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-            //httpHeaders.setContentDispositionFormData("attachment", URLEncoder.encode(file.getName(), "UTF-8"));
-            //return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),httpHeaders, HttpStatus.OK);
 
         } catch (Exception e) {
             LOGGER.info(e.getMessage());
             LOGGER.error("/answer/service", e);
             return null;
-            //return new ResponseEntity<byte[]>(HttpStatus.NO_CONTENT);
         }
     }
     @ResponseBody
@@ -141,8 +118,7 @@ public class AnswerController {
             }
             out.flush();
 
-        }catch (Exception e)
-        {
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }

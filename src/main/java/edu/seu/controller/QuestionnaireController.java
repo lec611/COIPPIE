@@ -17,6 +17,7 @@ import java.util.List;
  * @date 19/10/29
  */
 @Controller
+@RequestMapping("/questionnaire")
 public class QuestionnaireController {
     @Autowired
     private QuestionnaireService questionnaireService;

@@ -44,7 +44,6 @@ public class DocumentController {
     public void insert(MultipartFile imageFile, HttpServletRequest request, HttpServletResponse response){
         Document document = new Document();
         document.setPark(request.getParameter("parkName"));
-        System.out.println(request.getParameter("parkName"));
         document.setYear(request.getParameter("constructionYear"));
         document.setInvest(request.getParameter("investmentUnit"));
         document.setNation(request.getParameter("country"));

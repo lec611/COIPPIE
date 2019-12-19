@@ -194,19 +194,15 @@
             data: {"user": user, "park": park, "year": year, "invest": invest},
             dataType: "json",
             success: function (data) {
-                alert(data);
                 download();
-                //此处是去除双引号用的
-                //var reg = new RegExp('"',"g");
-                //var str = data.replace(reg,"");
-                //修改a标签的路径，变为自己的数据（data是后台返回的数据，数据就是新的链接）
-                //$('#url').attr('href',"${ctx}/answer/service");
+                alert(data);
             }
         });
 
     }
+
     function download() {
-        window.location.replace("/answer/download");
+        window.location.replace("${ctx}/answer/download");
     }
 
 </script>

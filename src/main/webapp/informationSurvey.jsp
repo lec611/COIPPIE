@@ -91,7 +91,9 @@
     </div>
     <div class="layui-body left-nav-body" style="left:30%;width: 70%;">
         <div style="margin-top:3%;font-size: large" id="content">
+            <form id="contentForm" action="/questionnaire/questionnaire">
 
+            </form>
         </div>
         <div style="margin-top:20px;">
             <button class="btn btn-default">保存（S）</button>
@@ -153,7 +155,7 @@
             dataType: 'json',
             success: function (result) {
                 var data = eval('('+result+')');
-                $("#content").html(constructUI(data));
+                $("#contentForm").html(constructUI(data));
             },
             failure: function () {
                 alert("获取数据失败！");
