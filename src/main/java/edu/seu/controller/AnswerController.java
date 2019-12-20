@@ -41,11 +41,13 @@ public class AnswerController {
     @RequestMapping("/upload")
     public void upload(HttpServletRequest request,HttpServletResponse response) {
 
-        String count=request.getParameter("count");
-        System.out.println("count:"+count);
+        String type = (String) request.getSession().getAttribute("type");
 
-        for(int i = 0 ;i < Integer.parseInt(count);i++)
-                System.out.println(request.getParameter("options"+i));
+        String count=request.getParameter("count");
+        System.out.println(count);
+        for(int i = 0 ;i < Integer.parseInt(count);i++) {
+            System.out.println(request.getParameter("options"+i));
+        }
 //        String data = request.getParameter("data");
 //        double score = 0.0;
 //
