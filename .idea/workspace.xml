@@ -7,20 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7cf3c72c-948b-4d30-8722-2c59349c46c4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/seu/controller/AnswerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/seu/controller/AnswerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/seu/controller/DocumentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/seu/controller/DocumentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/seu/controller/QuestionnaireController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/seu/controller/QuestionnaireController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/establishFile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/establishFile.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/informationSurvey.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/informationSurvey.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/OICPMPIE/WEB-INF/classes/edu/seu/controller/AnswerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/OICPMPIE/WEB-INF/classes/edu/seu/controller/AnswerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/OICPMPIE/WEB-INF/classes/edu/seu/controller/DocumentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/OICPMPIE/WEB-INF/classes/edu/seu/controller/DocumentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/OICPMPIE/WEB-INF/classes/edu/seu/controller/QuestionnaireController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/OICPMPIE/WEB-INF/classes/edu/seu/controller/QuestionnaireController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/OICPMPIE/establishFile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/OICPMPIE/establishFile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/OICPMPIE/informationSurvey.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/OICPMPIE/informationSurvey.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/seu/controller/AnswerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/seu/controller/AnswerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/seu/controller/DocumentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/seu/controller/DocumentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/edu/seu/controller/QuestionnaireController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/edu/seu/controller/QuestionnaireController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +17,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="lec &lt;782466523@qq.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
@@ -52,11 +46,12 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RunManager">
     <configuration name="COIPPIE" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.50" ALTERNATIVE_JRE_ENABLED="false">
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
+      <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8" />
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
       <deployment>
@@ -164,6 +159,9 @@
       <updated>1576753152479</updated>
       <workItem from="1576753160060" duration="5189000" />
       <workItem from="1576758887560" duration="6126000" />
+      <workItem from="1576828228381" duration="721000" />
+      <workItem from="1576828968324" duration="213000" />
+      <workItem from="1576829191469" duration="1139000" />
     </task>
     <task id="LOCAL-00001" summary="登录后用户名显示">
       <created>1576765487790</created>
@@ -172,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576765487790</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Document传递和问卷传递修改">
+      <created>1576827045581</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1576827045581</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,7 +185,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="登录后用户名显示" />
-    <option name="LAST_COMMIT_MESSAGE" value="登录后用户名显示" />
+    <MESSAGE value="Document传递和问卷传递修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="Document传递和问卷传递修改" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Tomcat_Server" timestamp="1576754760268">
@@ -191,86 +197,86 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#WebLogic_Server/0.0.1920.1040@0.0.1920.1040" timestamp="1576754604456" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576826488760">
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1576829054389">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576826488760" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576829054389" />
     <state x="552" y="178" key="#com.intellij.j2ee.appServerIntegrations.ApplicationServersConfigurable" timestamp="1576826444049">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#com.intellij.j2ee.appServerIntegrations.ApplicationServersConfigurable/0.0.1920.1040@0.0.1920.1040" timestamp="1576826444048" />
-    <state x="497" y="113" key="CommitChangelistDialog2" timestamp="1576765766069">
+    <state x="497" y="113" key="CommitChangelistDialog2" timestamp="1576827044178">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="497" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576765766069" />
+    <state x="497" y="113" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1576827044178" />
     <state x="740" y="260" key="FileChooserDialogImpl" timestamp="1576755970926">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="260" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576755970926" />
-    <state width="1293" height="590" key="GridCell.Tab.0.bottom" timestamp="1576826895790">
+    <state width="1293" height="126" key="GridCell.Tab.0.bottom" timestamp="1576830336608">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895790" />
-    <state width="1293" height="590" key="GridCell.Tab.0.center" timestamp="1576826895790">
+    <state width="1293" height="126" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336608" />
+    <state width="1293" height="126" key="GridCell.Tab.0.center" timestamp="1576830336608">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895790" />
-    <state width="1293" height="590" key="GridCell.Tab.0.left" timestamp="1576826895790">
+    <state width="1293" height="126" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336608" />
+    <state width="1293" height="126" key="GridCell.Tab.0.left" timestamp="1576830336608">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895790" />
-    <state width="1293" height="590" key="GridCell.Tab.0.right" timestamp="1576826895790">
+    <state width="1293" height="126" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336608" />
+    <state width="1293" height="126" key="GridCell.Tab.0.right" timestamp="1576830336608">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895790" />
-    <state width="1293" height="590" key="GridCell.Tab.1.bottom" timestamp="1576826895703">
+    <state width="1293" height="126" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336608" />
+    <state width="1293" height="126" key="GridCell.Tab.1.bottom" timestamp="1576830336497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895703" />
-    <state width="1293" height="590" key="GridCell.Tab.1.center" timestamp="1576826895703">
+    <state width="1293" height="126" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336497" />
+    <state width="1293" height="126" key="GridCell.Tab.1.center" timestamp="1576830336497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895703" />
-    <state width="1293" height="590" key="GridCell.Tab.1.left" timestamp="1576826895703">
+    <state width="1293" height="126" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336497" />
+    <state width="1293" height="126" key="GridCell.Tab.1.left" timestamp="1576830336497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895703" />
-    <state width="1293" height="590" key="GridCell.Tab.1.right" timestamp="1576826895703">
+    <state width="1293" height="126" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336497" />
+    <state width="1293" height="126" key="GridCell.Tab.1.right" timestamp="1576830336497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895703" />
-    <state width="1293" height="590" key="GridCell.Tab.2.bottom" timestamp="1576826895703">
+    <state width="1293" height="126" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336497" />
+    <state width="1293" height="126" key="GridCell.Tab.2.bottom" timestamp="1576830336498">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895703" />
-    <state width="1293" height="590" key="GridCell.Tab.2.center" timestamp="1576826895703">
+    <state width="1293" height="126" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336498" />
+    <state width="1293" height="126" key="GridCell.Tab.2.center" timestamp="1576830336497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895703" />
-    <state width="1293" height="590" key="GridCell.Tab.2.left" timestamp="1576826895703">
+    <state width="1293" height="126" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336497" />
+    <state width="1293" height="126" key="GridCell.Tab.2.left" timestamp="1576830336497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895703" />
-    <state width="1293" height="590" key="GridCell.Tab.2.right" timestamp="1576826895703">
+    <state width="1293" height="126" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336497" />
+    <state width="1293" height="126" key="GridCell.Tab.2.right" timestamp="1576830336497">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="590" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576826895703" />
+    <state width="1293" height="126" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1576830336497" />
     <state x="650" y="230" key="RollbackChangesDialog" timestamp="1576760742199">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="650" y="230" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576760742199" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1576826474788">
+    <state x="461" y="162" key="SettingsEditor" timestamp="1576829036007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576826474788" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1576765491263">
+    <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576829036007" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1576827052838">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576765491263" />
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1576758890361">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1576827052838" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1576829193026">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576758890361" />
+    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1576829193026" />
     <state x="678" y="311" key="git4idea.merge.GitPullDialog" timestamp="1576811065227">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

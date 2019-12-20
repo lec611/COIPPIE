@@ -118,7 +118,6 @@
             dataType: 'json',
             success: function (result) {
                 var data = eval('('+result+')');
-
                 $("#content").html(constructUI(data));
             },
             failure: function () {
@@ -195,7 +194,7 @@
     function showQuestions(type) {
         $.ajax({
             type: 'post',
-            url: '${ctx}/questionnaire',
+            url: '${ctx}/questionnaire/questionnaire',
             data: {"type":type},
             dataType: 'json',
             success: function (result) {
