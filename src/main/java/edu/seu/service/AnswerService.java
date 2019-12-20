@@ -62,7 +62,7 @@ public class AnswerService {
     }
 
     /**
-     * 上载用户评估结果
+     * 上载用户评估结果push
      */
     public void uploadAnswer(String type,String data,double score){
         String name = userService.getCurrentUser().getName();
