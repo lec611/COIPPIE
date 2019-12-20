@@ -46,7 +46,7 @@ public class AnswerController {
         int count=Integer.parseInt(request.getParameter("count"));
         String data = "";
 
-        //如果是规划实施过程问卷的话，则需要对评分进行处理
+        //如果是规划实施过程问卷的话，则需要对评分进行处理test
         if(type.equals("规划实施过程")) {
             String temp;
             for(int i = 0 ;i < 2;i++) {
