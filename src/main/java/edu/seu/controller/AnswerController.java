@@ -40,8 +40,12 @@ public class AnswerController {
     @ResponseBody
     @RequestMapping("/upload")
     public void upload(HttpServletRequest request,HttpServletResponse response) {
-        String type = request.getParameter("options0");
-        System.out.println(type);
+
+        String count=request.getParameter("count");
+        System.out.println("count:"+count);
+
+        for(int i = 0 ;i < Integer.parseInt(count);i++)
+                System.out.println(request.getParameter("options"+i));
 //        String data = request.getParameter("data");
 //        double score = 0.0;
 //

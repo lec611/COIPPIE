@@ -118,7 +118,6 @@
             dataType: 'json',
             success: function (result) {
                 var data = eval('('+result+')');
-
                 $("#content").html(constructUI(data));
             },
             failure: function () {
@@ -172,30 +171,38 @@
 
     function constructUI(data){
         var htmlStr="";
+        var count=0;//题目数量
+        var n=0;//辅助用于表示题目名称
         for(var i=0;i<data['module'].length;i++) {
             htmlStr += "<div style='background-color: #007DDB;margin-top:10px;'><b>" + data['module'][i] + "</b></div>";
             for (var j = 0; j < data['questions'][i].length; j++) {
+                var m=n+j;
                 if(data['optionType'][i][j]===0){
                     htmlStr += "<b><br>" + data['questions'][i][j] + "</b><br>";
                     for (var k = 0; k < data['options'][i][j].length; k++) {
-                        htmlStr += '<input type="radio" style="margin-left: 40px;" name="options' + j + '" value="'+data['score'][i][j][k]+'">' + data['options'][i][j][k];
+                        htmlStr += '<input type="radio" style="margin-left: 40px;" name="options' + m + '" value="'+data['score'][i][j][k]+'">' + data['options'][i][j][k];
+
                         if((k+1)%4==0){
                             htmlStr+="<br>";
                         }
                     }
                 }else if(data['optionType'][i][j]===1){
-                    htmlStr+="<b><br>"+data['questions'][i][j]+"</b> &nbsp <input type='text' style='width: 20%;'>%";
+                    htmlStr+="<b><br>"+data['questions'][i][j]+"</b> &nbsp <input type='text' style='width: 20%;' name='options"+ m +"'>%";
                 }
                 htmlStr += '<br>';
+                count++;
             }
+            n+=j;
         }
+        htmlStr += '<input type="text" style="display: none" name="count" value="'+count+'">';
+
         return htmlStr;
     }
 
     function showQuestions(type) {
         $.ajax({
             type: 'post',
-            url: '${ctx}/questionnaire',
+            url: '${ctx}/questionnaire/questionnaire',
             data: {"type":type},
             dataType: 'json',
             success: function (result) {

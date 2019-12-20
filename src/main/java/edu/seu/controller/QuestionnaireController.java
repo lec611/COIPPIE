@@ -28,6 +28,7 @@ public class QuestionnaireController {
     @ResponseBody
     @RequestMapping(value = "/questionnaire",produces = "text/html;charset=UTF-8")
     public String questionnaire(HttpServletRequest request, HttpServletResponse response){
+
         String type = request.getParameter("type");
         List<Questionnaire> questionnaireList = questionnaireService.showQuestionnaire(type);
 
