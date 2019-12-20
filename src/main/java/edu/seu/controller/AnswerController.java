@@ -55,6 +55,15 @@ public class AnswerController {
 //        }
 //        score /= str.length;
 //
+        if(type.equals("规划实施环境")){
+            type = "environment";
+        }else if(type.equals("规划实施过程")){
+            type = "process";
+        }else if(type.equals("规划实施效果")){
+            type = "effect";
+        }else if(type.equals("规划工作与成果")){
+            type = "result";
+        }
 //        answerService.uploadAnswer(type, data, score);
 
         try {

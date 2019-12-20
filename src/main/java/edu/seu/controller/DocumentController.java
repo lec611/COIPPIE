@@ -93,8 +93,7 @@ public class DocumentController {
 
         documentService.insertDocument(document);
         try {
-            System.out.println(request.getContextPath()+"/establishFile.jsp");
-            response.sendRedirect(request.getContextPath()+"/establishFile.jsp");
+            response.sendRedirect(request.getContextPath()+"/informationSurvey.jsp");
         } catch (IOException e) {
             e.printStackTrace();
         }
