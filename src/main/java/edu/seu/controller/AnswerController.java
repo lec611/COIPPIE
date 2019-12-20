@@ -42,21 +42,65 @@ public class AnswerController {
     public void upload(HttpServletRequest request,HttpServletResponse response) {
 
         String type = (String) request.getSession().getAttribute("type");
+        System.out.println(type);
 
-        String count=request.getParameter("count");
+        int count=Integer.parseInt(request.getParameter("count"));
         System.out.println(count);
-        for(int i = 0 ;i < Integer.parseInt(count);i++) {
-            System.out.println(request.getParameter("options"+i));
+        String data = "";
+
+        //如果是规划实施过程问卷的话，则需要对评分进行处理
+        if(type.equals("规划实施过程")) {
+            String temp;
+            for(int i = 0 ;i < 2;i++) {
+                temp = request.getParameter("options"+i);
+                if(temp == null || temp.equals("")){
+                    temp = "0";
+                }
+                double proportion = Double.parseDouble(temp);
+                if(proportion < 50 || proportion > 100){
+                    proportion = 0;
+                }else if(proportion >= 90 && proportion <= 100){
+                    proportion = 100;
+                }
+                data += proportion+",";
+                System.out.println(data);
+            }
+            //对于剩下的回答结果
+            for(int i = 2 ;i < count;i++) {
+                temp = request.getParameter("options"+i);
+                if(temp == null || temp.equals("")){
+                    temp = "0";
+                }
+                data += temp;
+                if(i != count-1){
+                    data += ",";
+                }
+                System.out.println(data);
+            }
+        }else{
+            //对于剩下来的其他问卷，直接将分数获取并添加在data末尾
+            String temp;
+            for(int i = 0 ;i < count;i++) {
+                temp = request.getParameter("options"+i);
+                if(temp == null || temp.equals("")){
+                    temp = "0";
+                }
+                data += temp;
+                if(i != count-1){
+                    data += ",";
+                }
+                System.out.println(data);
+            }
         }
-//        String data = request.getParameter("data");
-//        double score = 0.0;
-//
-//        String[] str = data.split("[,\\;]");
-//        for (String s : str) {
-//            score += Double.parseDouble(s);
-//        }
-//        score /= str.length;
-//
+
+        double score = 0.0;
+
+        String[] str = data.split("[,\\;]");
+        for (String s : str) {
+            score += Double.parseDouble(s);
+        }
+        score /= str.length;
+
         if(type.equals("规划实施环境")){
             type = "environment";
         }else if(type.equals("规划实施过程")){
@@ -66,7 +110,7 @@ public class AnswerController {
         }else if(type.equals("规划工作与成果")){
             type = "result";
         }
-//        answerService.uploadAnswer(type, data, score);
+        answerService.uploadAnswer(type, data, score);
 
         try {
             response.sendRedirect(request.getContextPath()+"/informationSurvey.jsp");
@@ -74,7 +118,7 @@ public class AnswerController {
             e.printStackTrace();
         }
 
-//        return JSON.toJSONString("success");
+        //return JSON.toJSONString("success");
     }
 
     /**
