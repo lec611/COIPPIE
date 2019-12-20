@@ -29,6 +29,9 @@ public class QuestionnaireController {
     @RequestMapping(value = "/questionnaire",produces = "text/html;charset=UTF-8")
     public String questionnaire(HttpServletRequest request, HttpServletResponse response){
         String type = request.getParameter("type");
+
+        request.getSession().setAttribute("type",type);
+
         List<Questionnaire> questionnaireList = questionnaireService.showQuestionnaire(type);
 
         return JSON.toJSONString(toString(questionnaireList));

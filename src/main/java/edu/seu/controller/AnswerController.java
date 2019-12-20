@@ -40,7 +40,7 @@ public class AnswerController {
     @ResponseBody
     @RequestMapping("/upload")
     public void upload(HttpServletRequest request,HttpServletResponse response) {
-        String type = request.getParameter("options0");
+        String type = (String) request.getSession().getAttribute("type");
         System.out.println(type);
 //        String data = request.getParameter("data");
 //        double score = 0.0;
