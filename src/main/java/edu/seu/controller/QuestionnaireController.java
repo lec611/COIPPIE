@@ -2,6 +2,7 @@ package edu.seu.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.sun.deploy.net.HttpResponse;
 import edu.seu.model.Questionnaire;
 import edu.seu.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,11 +27,12 @@ public class QuestionnaireController {
 
     @ResponseBody
     @RequestMapping(value = "/questionnaire",produces = "text/html;charset=UTF-8")
-    public String questionnaire(HttpServletRequest request){
+    public String questionnaire(HttpServletRequest request, HttpServletResponse response){
         String type = request.getParameter("type");
         List<Questionnaire> questionnaireList = questionnaireService.showQuestionnaire(type);
 
         return JSON.toJSONString(toString(questionnaireList));
+
     }
 
     private String toString(List<Questionnaire> list){

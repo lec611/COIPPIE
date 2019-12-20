@@ -39,20 +39,27 @@ public class AnswerController {
 
     @ResponseBody
     @RequestMapping("/upload")
-    public String upload(HttpServletRequest request) {
-        String type = request.getParameter("type");
-        String data = request.getParameter("data");
-        double score = 0.0;
+    public void upload(HttpServletRequest request,HttpServletResponse response) {
+        String type = request.getParameter("options0");
+        System.out.println(type);
+//        String data = request.getParameter("data");
+//        double score = 0.0;
+//
+//        String[] str = data.split("[,\\;]");
+//        for (String s : str) {
+//            score += Double.parseDouble(s);
+//        }
+//        score /= str.length;
+//
+//        answerService.uploadAnswer(type, data, score);
 
-        String[] str = data.split("[,\\;]");
-        for (String s : str) {
-            score += Double.parseDouble(s);
+        try {
+            response.sendRedirect(request.getContextPath()+"/informationSurvey.jsp");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        score /= str.length;
 
-        answerService.uploadAnswer(type, data, score);
-
-        return JSON.toJSONString("success");
+//        return JSON.toJSONString("success");
     }
 
     /**

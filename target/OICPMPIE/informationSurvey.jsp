@@ -90,17 +90,19 @@
         <div><h2><a class="label label-default" onclick="showQuestions('规划工作与成果')"> 规划工作与成果 </a></h2><br></div>
     </div>
     <div class="layui-body left-nav-body" style="left:30%;width: 70%;">
-        <div style="margin-top:3%;font-size: large" id="content">
-            <form id="contentForm" action="/questionnaire/questionnaire">
+        <form id="contentForm" action="${ctx}/answer/upload">
+            <div style="margin-top:3%;font-size: large" id="content">
 
-            </form>
-        </div>
-        <div style="margin-top:20px;">
-            <button class="btn btn-default">保存（S）</button>
-            <button class="btn btn-default">重新填写（R）</button>
-            <button class="btn btn-default">关闭（C）</button>
-            <button class="btn btn-default">提交（S）</button>
-        </div>
+
+
+            </div>
+            <div style="margin-top:20px;">
+                <button class="btn btn-default">保存（S）</button>
+                <button class="btn btn-default">重新填写（R）</button>
+                <button class="btn btn-default">关闭（C）</button>
+                <button class="btn btn-default" type="submit">提交（S）</button>
+            </div>
+        </form>
     </div>
 
 </div>
@@ -176,7 +178,7 @@
                 if(data['optionType'][i][j]===0){
                     htmlStr += "<b><br>" + data['questions'][i][j] + "</b><br>";
                     for (var k = 0; k < data['options'][i][j].length; k++) {
-                        htmlStr += '<input type="radio" style="margin-left: 40px;" name="options' + j + '" value="">' + data['options'][i][j][k];
+                        htmlStr += '<input type="radio" style="margin-left: 40px;" name="options' + j + '" value="'+data['score'][i][j][k]+'">' + data['options'][i][j][k];
                         if((k+1)%4==0){
                             htmlStr+="<br>";
                         }
@@ -198,7 +200,7 @@
             dataType: 'json',
             success: function (result) {
                 var data = eval('('+result+')');
-                $("#contentForm").html(constructUI(data));
+                $("#content").html(constructUI(data));
             },
             failure: function () {
                 alert("获取数据失败！");

@@ -99,7 +99,7 @@
         <!-- 内容主体区域 -->
         <div class="blog-main">
             <div style="margin-left:60px;width: fit-content;"><h2><label class="label label-default">园区基本信息</label></h2></div>
-            <form action="/document/insert">
+            <form action="${ctx}/document/insert">
                 <div style="font-size:20px;border: 2px solid;margin-left:60px;margin-right:60px;padding:10px;"><!--method="post" enctype="multipart/form-data"-->
                     园区名称<input type="text" class="inputStyle" name ="parkName">   建区年份<input type="text" class="inputStyle" name="constructionYear">  所在国家<input type="text" class="inputStyle" name="country"><br>
                     规划产业<input type="text" class="inputStyle" name="planningIndustry">   规划规模<input type="text" class="inputStyle" name="planningScale"> (km²)   评估规模（规划）<input type="text" class="inputStyle" name="evaluationScale">(km²)<br>
