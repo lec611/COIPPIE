@@ -30,6 +30,9 @@ public class QuestionnaireController {
     public String questionnaire(HttpServletRequest request, HttpServletResponse response){
 
         String type = request.getParameter("type");
+
+        request.getSession().setAttribute("type",type);
+
         List<Questionnaire> questionnaireList = questionnaireService.showQuestionnaire(type);
 
         return JSON.toJSONString(toString(questionnaireList));
