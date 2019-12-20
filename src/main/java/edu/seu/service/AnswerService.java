@@ -4,6 +4,7 @@ import edu.seu.base.CodeEnum;
 import edu.seu.dao.AnswerDao;
 import edu.seu.exceptions.OICPMPIEExceptions;
 import edu.seu.model.Answer;
+import edu.seu.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +70,7 @@ public class AnswerService {
         String park = documentService.getCurrentPark();
         String year = documentService.getCurrentYear();
         String invest = documentService.getCurrentInvest();
+
 
         //若仍是该用户针对方才所填档案的评估回答，则执行更新操作
         if(name.equals(getCurrentUser()) && park.equals(getCurrentPark()) && year.equals(getCurrentYear()) && invest.equals(getCurrentInvest())) {

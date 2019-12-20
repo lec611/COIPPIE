@@ -42,10 +42,8 @@ public class AnswerController {
     public void upload(HttpServletRequest request,HttpServletResponse response) {
 
         String type = (String) request.getSession().getAttribute("type");
-        System.out.println(type);
 
         int count=Integer.parseInt(request.getParameter("count"));
-        System.out.println(count);
         String data = "";
 
         //如果是规划实施过程问卷的话，则需要对评分进行处理
@@ -63,7 +61,6 @@ public class AnswerController {
                     proportion = 100;
                 }
                 data += proportion+",";
-                System.out.println(data);
             }
             //对于剩下的回答结果
             for(int i = 2 ;i < count;i++) {
@@ -75,7 +72,6 @@ public class AnswerController {
                 if(i != count-1){
                     data += ",";
                 }
-                System.out.println(data);
             }
         }else{
             //对于剩下来的其他问卷，直接将分数获取并添加在data末尾
@@ -89,7 +85,6 @@ public class AnswerController {
                 if(i != count-1){
                     data += ",";
                 }
-                System.out.println(data);
             }
         }
 
