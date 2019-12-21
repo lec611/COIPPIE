@@ -8,6 +8,7 @@ import edu.seu.base.CommonResponse;
 import edu.seu.exceptions.OICPMPIEExceptions;
 import edu.seu.model.Answer;
 import edu.seu.service.AnswerService;
+import edu.seu.service.QuestionnaireService;
 import edu.seu.util.Html2PDF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -36,6 +38,9 @@ public class AnswerController {
 
     @Autowired
     private AnswerService answerService;
+
+    @Autowired
+    private QuestionnaireService questionnaireService;
 
     @ResponseBody
     @RequestMapping("/upload")
@@ -117,17 +122,66 @@ public class AnswerController {
     }
 
     /**
-     * function: provide evaluation for evaluation.jsp
+     * function: provide evaluationScore for evaluation.jsp
      */
     @ResponseBody
     @RequestMapping("/evaluation")
-    public void evaluation(HttpServletRequest request) {
+    public String evaluation(HttpServletRequest request) {
         String type = request.getParameter("type");
 
         //如果问卷相应模块已提交
         if (answerService.isSubmitted(type)) {
-            //生成问卷评估分析报告
+            //返回相应问卷结果字串供前端生成图表
+            if(type.equals("total")){
+                String total = answerService.answerScore(type);
+                String[] totalScore = total.split(",");
+                return JSON.toJSONString(toString(type, Arrays.asList(totalScore),null));
+            }else{
+                List<String> question = questionnaireService.showQuestion(type);
+                String score = answerService.answerScore(type);
+                return JSON.toJSONString(toString(type,question,score));
+            }
+
+        }else{
+            return JSON.toJSONString("未提交相应问卷");
         }
+
+    }
+    public String toString(String type,List<String> question,String score){
+        String data;
+        if(type.equals("total")){
+            data="{\"subScore\":[";
+            for(int i=0;i<4;i++){
+                data += question.get(i);
+                if(i != 3){
+                    data += ",";
+                }
+            }
+            double totalScore = Double.parseDouble(question.get(4));
+            data += "],\"totalScore\":["+totalScore+"],\"level\":[\"";
+            if(totalScore >= 80){
+                data += "优秀";
+            }else if(totalScore<80 && totalScore>=70){
+                data += "良好";
+            }else if(totalScore<70 && totalScore>=60){
+                data += "一般";
+            }else if(totalScore<60 && totalScore>=40){
+                data += "较差";
+            }else if(totalScore<40){
+                data += "很差";
+            }
+            data += "\"]}";
+        }else{
+            data="{\"question\":[\"";
+            for(int i=0;i<question.size();i++){
+                data += question.get(i);
+                if(i != question.size()-1){
+                    data += "\",\"";
+                }
+            }
+            data += "\"],\"score\":["+score+"]}";
+        }
+        return data;
 
     }
 

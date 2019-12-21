@@ -19,4 +19,8 @@ public class QuestionnaireService {
     public List<Questionnaire> showQuestionnaire(String type){
         return questionnaireDao.showQuestionnaire(type);
     }
+
+    public List<String> showQuestion(String type){
+        return questionnaireDao.showQuestion(type);
+    }
 }

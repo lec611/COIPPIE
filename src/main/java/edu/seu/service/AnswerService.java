@@ -152,6 +152,30 @@ public class AnswerService {
     }
 
     /**
+     * 返回对应问卷结果
+     */
+    public String answerScore(String type){
+        String name = userService.getCurrentUser().getName();
+        String park = documentService.getCurrentPark();
+        String year = documentService.getCurrentYear();
+        String invest = documentService.getCurrentInvest();
+
+        Answer answer = answerDao.queryAnswer(name,park,year,invest);
+        if (type.equals("environment")) {
+            return answer.getEnvironment();
+        }else if (type.equals("process")){
+            return answer.getProcess();
+        }else if (type.equals("effect")){
+            return answer.getEffect();
+        }else if (type.equals("result")){
+            return answer.getResult();
+        }else{
+            //type.equals("total")
+            return answer.getScoreEn()+","+answer.getScorePr()+","+answer.getScoreEf()+","+answer.getScoreRe()+","+answer.getScoreTotal();
+        }
+    }
+
+    /**
      *根据关键字匹配评估条目
      */
     public List<Answer> queryByCondition(String condition,String key) throws OICPMPIEExceptions {

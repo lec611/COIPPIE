@@ -18,4 +18,7 @@ public interface QuestionnaireDao {
     @Select({"select ",FIELD," from ",TABLE_NAME," where type=#{type}"})
     List<Questionnaire> showQuestionnaire(String type);
 
+    @Select({"select question from ",TABLE_NAME," where type=#{type}"})
+    List<String> showQuestion(String type);
+
 }
