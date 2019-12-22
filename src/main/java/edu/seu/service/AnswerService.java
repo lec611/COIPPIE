@@ -71,7 +71,6 @@ public class AnswerService {
         String year = documentService.getCurrentYear();
         String invest = documentService.getCurrentInvest();
 
-
         //若仍是该用户针对方才所填档案的评估回答，则执行更新操作
         if(name.equals(getCurrentUser()) && park.equals(getCurrentPark()) && year.equals(getCurrentYear()) && invest.equals(getCurrentInvest())) {
             int id = answerDao.selectID(name,park,year,invest);
@@ -112,7 +111,7 @@ public class AnswerService {
         String year = documentService.getCurrentYear();
         String invest = documentService.getCurrentInvest();
 
-        if(name.equals(getCurrentUser()) && park.equals(getCurrentPark()) && year.equals(getCurrentYear()) && invest.equals(getCurrentInvest())) {
+        if(getCurrentUser().equals(name) && getCurrentPark().equals(park) && getCurrentYear().equals(year) && getCurrentInvest().equals(invest)) {
             Answer answer = answerDao.queryAnswer(name,park,year,invest);
             if (type.equals("environment")) {
                 return answer.getEnvironment() != null;

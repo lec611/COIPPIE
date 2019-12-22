@@ -7,6 +7,7 @@ import edu.seu.base.CodeEnum;
 import edu.seu.base.CommonResponse;
 import edu.seu.exceptions.OICPMPIEExceptions;
 import edu.seu.model.Answer;
+import edu.seu.model.Questionnaire;
 import edu.seu.service.AnswerService;
 import edu.seu.service.QuestionnaireService;
 import edu.seu.util.Html2PDF;
@@ -25,7 +26,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author wjx
@@ -128,25 +131,29 @@ public class AnswerController {
     @RequestMapping("/evaluation")
     public String evaluation(HttpServletRequest request) {
         String type = request.getParameter("type");
-
+        Map<String,String> questionMapping = new HashMap();
+        questionMapping.put("environment","规划实施环境");
+        questionMapping.put("process","规划实施过程");
+        questionMapping.put("effect","规划实施效果");
+        questionMapping.put("result","规划工作与成果");
         //如果问卷相应模块已提交
         if (answerService.isSubmitted(type)) {
             //返回相应问卷结果字串供前端生成图表
-            if(type.equals("total")){
+            if("total".equals(type)){
                 String total = answerService.answerScore(type);
                 String[] totalScore = total.split(",");
                 return JSON.toJSONString(toString(type, Arrays.asList(totalScore),null));
             }else{
-                List<String> question = questionnaireService.showQuestion(type);
+                List<String> question = questionnaireService.showQuestion(questionMapping.get(type));
                 String score = answerService.answerScore(type);
+                System.out.println(toString(type,question,score));
                 return JSON.toJSONString(toString(type,question,score));
             }
-
         }else{
             return JSON.toJSONString("未提交相应问卷");
         }
-
     }
+
     public String toString(String type,List<String> question,String score){
         String data;
         if(type.equals("total")){
@@ -173,6 +180,7 @@ public class AnswerController {
             data += "\"]}";
         }else{
             data="{\"question\":[\"";
+            System.out.println("size:"+question.size());
             for(int i=0;i<question.size();i++){
                 data += question.get(i);
                 if(i != question.size()-1){

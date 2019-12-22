@@ -92,23 +92,28 @@
         <div><h3><label class="label label-default"> 规划工作与成果评估 </label></h3><br></div>
         <div><h3><label class="label label-default"> 总体评估报告 </label></h3><br></div>
     </div>
-    <div class="layui-body left-nav-body" style="left:30%;width: 70%;">
-        <div style="height: 60%;">
-            <div style="margin-top: 20px;"><h4> 规划实施环境评估报告 <a href="">（点击查看）</a> </h4><br></div>
-            <div style="margin-top: 20px;"><h4> 规划实施过程评估报告 <a href="">（点击查看）</a></h4><br></div>
-            <div style="margin-top: 20px;"><h4> 规划实施效果评估报告 <a href="">（点击查看）</a></h4><br></div>
-            <div style="margin-top: 20px;"><h4> 规划工作与成果评估报告 <a href="">（点击查看）</a></h4><br></div>
-            <div style="margin-top: 20px;"><h4> 规划实施总体评估报告 <a href="">（点击查看）</a></h4><br></div>
+    <div class="layui-body left-nav-body" style="left:30%;width: 50%;">
+        <div style="height: 60%;width:50%;">
+            <div style="margin-top: 20px;"><h4> 规划实施环境评估报告 <a onclick="checkResult('environment')">（点击查看）</a> </h4><br></div>
+            <div style="margin-top: 20px;"><h4> 规划实施过程评估报告 <a onclick="checkResult('process')">（点击查看）</a></h4><br></div>
+            <div style="margin-top: 20px;"><h4> 规划实施效果评估报告 <a onclick="checkResult('effect')">（点击查看）</a></h4><br></div>
+            <div style="margin-top: 20px;"><h4> 规划工作与成果评估报告 <a onclick="checkResult('result')">（点击查看）</a></h4><br></div>
+            <div style="margin-top: 20px;"><h4> 规划实施总体评估报告 <a onclick="checkResult('total')">（点击查看）</a></h4><br></div>
         </div>
-        <div>
+        <div style="width:50%;">
             <button class="btn btn-default">打印报告（P）</button>
             <button class="btn btn-default">关闭（C）</button>
         </div>
+    </div>
+    <div style="width: 20%;margin-left:60%;height: auto;height: 60%" id="chartContainer">
+
     </div>
 
 </div>
 
 </body>
+<script src="static/js/canvasjs.min.js"></script>
+<script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
 <script>
     $(function () {
         checkUserLogin();
@@ -154,6 +159,71 @@
                 }
             }
         });
+    }
+
+    function checkResult(type) {
+        $.ajax({
+           type:"post",
+           url:"${ctx}/answer/evaluation",
+            datatype:"json",
+            data:{"type":type},
+            success:function (data) {
+               if("未提交相应问卷"==data){
+                   alert(data);
+               }
+               showBarChart(data);
+            }
+        });
+    }
+
+    function showBarChart(result) {//柱状图
+        var data = eval('(' + result + ')');
+        charData = [];
+        for (var i = 0; i < data["question"].length; i++) {
+            var column = {
+                type: "column",
+                name: data['question'][i] + '得分',
+                legendText: "" + data['question'][i],
+                showInLegend: true,
+                dataPoints: [
+                    {label: " ", y: parseInt(data['score'][i])},
+                ]
+            };
+            charData.push(column);
+            //空列
+            var column = {
+                type: "column",
+                showInLegend: false,
+                dataPoints: [{}]
+            };
+            charData.push(column);
+        }
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+                text: '柱状图',
+                x:'center'
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: charData,
+        });
+        chart.render();
+
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
     }
 
 </script>
