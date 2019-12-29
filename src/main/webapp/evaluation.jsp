@@ -230,6 +230,7 @@
             chart.render();
         }
     }
+
     function showBarChart2(result) {//柱状图
         var data = eval('(' + result + ')');
         var questionType = ["环境","过程","效果","工作与成果"];

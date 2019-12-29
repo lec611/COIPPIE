@@ -132,6 +132,7 @@ public class AnswerController {
     public String evaluation(HttpServletRequest request) {
         String type = request.getParameter("type");
         Map<String,String> questionMapping = new HashMap();
+
         questionMapping.put("environment","规划实施环境");
         questionMapping.put("process","规划实施过程");
         questionMapping.put("effect","规划实施效果");
