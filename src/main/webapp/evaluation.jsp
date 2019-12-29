@@ -171,6 +171,10 @@
                if("未提交相应问卷"==data){
                    alert(data);
                }
+                if("total" == type)
+                {
+                    showBarChart2(data)
+                }
                showBarChart(data);
             }
         });
@@ -179,6 +183,7 @@
     function showBarChart(result) {//柱状图
         var data = eval('(' + result + ')');
         charData = [];
+        //alert(data["question"].length)
         for (var i = 0; i < data["question"].length; i++) {
             var column = {
                 type: "column",
@@ -203,6 +208,57 @@
             animationEnabled: true,
             title: {
                 text: '柱状图',
+                x:'center'
+            },
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: toggleDataSeries
+            },
+            data: charData,
+        });
+        chart.render();
+
+        function toggleDataSeries(e) {
+            if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else {
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+    }
+    function showBarChart2(result) {//柱状图
+        var data = eval('(' + result + ')');
+        var questionType = ["环境","过程","效果","工作与成果"];
+        charData = [];
+        //alert(data["subScore"].length)
+        for (var i = 0; i < data["subScore"].length; i++) {
+            var column = {
+                type: "column",
+                name: questionType[i] + '得分',
+                legendText: "" + questionType[i],
+                showInLegend: true,
+                dataPoints: [
+                    {label: " ", y: parseInt(data['subScore'][i])},
+                ]
+            };
+            charData.push(column);
+            //空列
+            var column = {
+                type: "column",
+                showInLegend: false,
+                dataPoints: [{}]
+            };
+            charData.push(column);
+        }
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+                text: '分类得分情况',
                 x:'center'
             },
             toolTip: {

@@ -136,12 +136,18 @@ public class AnswerController {
         questionMapping.put("process","规划实施过程");
         questionMapping.put("effect","规划实施效果");
         questionMapping.put("result","规划工作与成果");
+        //questionMapping.put("total","总体评估报告");
         //如果问卷相应模块已提交
         if (answerService.isSubmitted(type)) {
             //返回相应问卷结果字串供前端生成图表
             if("total".equals(type)){
                 String total = answerService.answerScore(type);
                 String[] totalScore = total.split(",");
+                for(int i = 0 ; i < totalScore.length;i++)
+                {
+                    totalScore[i] = totalScore[i].substring(0,5);
+                }
+                //System.out.println(toString(type, Arrays.asList(totalScore),null));
                 return JSON.toJSONString(toString(type, Arrays.asList(totalScore),null));
             }else{
                 List<String> question = questionnaireService.showQuestion(questionMapping.get(type));
