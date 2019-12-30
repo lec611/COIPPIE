@@ -236,6 +236,10 @@ public class AnswerController {
             String realPath = context.getRealPath("/ftl");
             File file = new File(realPath + "/hello.pdf");
             response.setContentType("application/pdf");
+            /*
+             File file = new File(realPath + "/hello.html");
+            response.setContentType("application/form-data");
+             */
             response.addHeader("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"");
             ServletOutputStream out = response.getOutputStream();
             FileInputStream ips = new FileInputStream(file);

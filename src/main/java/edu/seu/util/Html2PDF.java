@@ -71,7 +71,7 @@ public class Html2PDF {
         renderer.setDocument(url);
         //解决中文支持
         ITextFontResolver fontResolver = renderer.getFontResolver();
-        fontResolver.addFont("c:/Windows/Fonts/Simsun.ttc", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+        fontResolver.addFont(realPath+"/simsun.ttc", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
 
         renderer.layout();
         renderer.createPDF(os);
