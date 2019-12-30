@@ -74,7 +74,7 @@
             <li class="dropdown pull-right layui-nav-item">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">帮助</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#" style="color: #0C0C0C">关于软件</a></li>
+                    <li><a href="#" style="color: #0C0C0C"onclick="showInfo();">关于软件</a></li>
                     <li class="divider"></li>
                     <li><a href="#" style="color: #0C0C0C">使用说明</a></li>
                 </ul>
@@ -158,6 +158,14 @@
     $(function () {
         checkUserLogin();
     });
+
+    function showInfo() {
+        alert("软件名称：Web境外国际合作园区总体规划实施评估软件（简称OICPMPIE）\n" +
+            "软件版本号：V1.0\n" +
+            "开发机构：东南大学\n" +
+            "开发人员：王兴平、赵胜波、赵四东、施一峰、胡雪峰\n" +
+            "编程人员：戚晓芳、刘恩赐，徐成龙，喻学乐，贺黎，王健翔，吴长姣");
+    }
 
     // 显示用户信息
     function checkUserLogin() {
