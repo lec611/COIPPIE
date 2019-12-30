@@ -173,6 +173,11 @@ public class AnswerService {
             return answer.getScoreEn()+","+answer.getScorePr()+","+answer.getScoreEf()+","+answer.getScoreRe()+","+answer.getScoreTotal();
         }
     }
+    public String selectByThreeElement(String name,String park,String year,String invest)
+    {
+        Answer answer = answerDao.queryAnswer(name,park,year,invest);
+        return answer.getScoreEn()+","+answer.getScorePr()+","+answer.getScoreEf()+","+answer.getScoreRe()+","+answer.getScoreTotal();
+    }
 
     /**
      *根据关键字匹配评估条目

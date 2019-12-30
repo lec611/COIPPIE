@@ -165,17 +165,24 @@
         $.ajax({
            type:"post",
            url:"${ctx}/answer/evaluation",
-            datatype:"json",
+            dataType:"json",
             data:{"type":type},
             success:function (data) {
                if("未提交相应问卷"==data){
                    alert(data);
                }
-                if("total" == type)
-                {
-                    showBarChart2(data)
+                if ("total" != type) {
+                    showBarChart(data);
+                } else {
+                    var result = eval('(' + data + ')');
+                    var subScore = result['subScore'];
+                    var totalScore = result['totalScore'];
+                    var level = result['level'];
+                    //alert('${ctx}/totalResult.jsp?subScore='+ subScore + 'totalScore='+totalScore+'level='+level)
+                    window.open('${ctx}/totalResult.jsp?subScore='+ subScore + '&totalScore='+totalScore+'&level='+level);
+                    //window.open('${ctx}/totalResult.jsp?data='+data);
+                   // showBarChart2(data);
                 }
-               showBarChart(data);
             }
         });
     }
@@ -183,7 +190,6 @@
     function showBarChart(result) {//柱状图
         var data = eval('(' + result + ')');
         charData = [];
-        //alert(data["question"].length)
         for (var i = 0; i < data["question"].length; i++) {
             var column = {
                 type: "column",
@@ -235,7 +241,7 @@
         var data = eval('(' + result + ')');
         var questionType = ["环境","过程","效果","工作与成果"];
         charData = [];
-        //alert(data["subScore"].length)
+        alert(data["subScore"].length)
         for (var i = 0; i < data["subScore"].length; i++) {
             var column = {
                 type: "column",

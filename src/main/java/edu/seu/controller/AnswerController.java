@@ -132,7 +132,6 @@ public class AnswerController {
     public String evaluation(HttpServletRequest request) {
         String type = request.getParameter("type");
         Map<String,String> questionMapping = new HashMap();
-
         questionMapping.put("environment","规划实施环境");
         questionMapping.put("process","规划实施过程");
         questionMapping.put("effect","规划实施效果");
@@ -144,10 +143,10 @@ public class AnswerController {
             if("total".equals(type)){
                 String total = answerService.answerScore(type);
                 String[] totalScore = total.split(",");
-                for(int i = 0 ; i < totalScore.length;i++)
-                {
-                    totalScore[i] = totalScore[i].substring(0,5);
-                }
+//                for(int i = 0 ; i < totalScore.length;i++)
+//                {
+//                    totalScore[i] = totalScore[i].substring(0,5);
+//                }
                 //System.out.println(toString(type, Arrays.asList(totalScore),null));
                 return JSON.toJSONString(toString(type, Arrays.asList(totalScore),null));
             }else{
@@ -211,14 +210,14 @@ public class AnswerController {
         String park = request.getParameter("park");
         String year = request.getParameter("year");
         String invest = request.getParameter("invest");
-
+        String totalScore = answerService.selectByThreeElement(user,park,year,invest);
         try {
             //获取本地地址，用于生成PDF文档
             ServletContext context = request.getSession().getServletContext();
             String realPath = context.getRealPath("/ftl");
             //生成PDF
             Html2PDF pdf = new Html2PDF();
-            pdf.createPdf(realPath);
+            pdf.createPdf(realPath,user,park,year,invest,totalScore);
 
             return JSON.toJSONString("success");
 

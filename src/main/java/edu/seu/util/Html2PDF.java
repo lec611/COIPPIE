@@ -15,7 +15,7 @@ import java.util.Map;
  * @date 2019/11/20
  */
 public class Html2PDF {
-    public String createPdf(String realPath) throws Exception {
+    public String createPdf(String realPath,String user,String park,String year,String invest,String totalScore) throws Exception {
         //根据ftl模板生成html文件
         // 第一步：创建一个Configuration对象，直接new一个对象。构造方法的参数就是freemarker对应的版本号。
         Configuration configuration = new Configuration(Configuration.getVersion());
@@ -27,8 +27,32 @@ public class Html2PDF {
         Template template = configuration.getTemplate("hello.ftl");
         // 第五步：创建一个模板使用的数据集，可以是pojo也可以是map。一般是Map。
         Map<String,String> dataModel = new HashMap();
+        //处理分数
+        String[] result = totalScore.split(",");
+        double totalResult = Double.parseDouble(result[4]);
+        String level = "";
+        if(totalResult >= 80){
+            level = "优秀";
+        }else if(totalResult<80 && totalResult>=70){
+            level = "良好";
+        }else if(totalResult<70 && totalResult>=60){
+            level = "一般";
+        }else if(totalResult<60 && totalResult>=40){
+            level = "较差";
+        }else if(totalResult<40){
+            level = "很差";
+        }
+
         //向数据集中添加数据
-        dataModel.put("title", "课堂秩序");
+        dataModel.put("title", "总得分情况");
+        dataModel.put("year",year);
+        dataModel.put("park",park);
+        dataModel.put("totalScore",result[4]);
+        dataModel.put("level",level);
+        dataModel.put("enScore",result[0]);
+        dataModel.put("prScore",result[1]);
+        dataModel.put("efScore",result[2]);
+        dataModel.put("reScore",result[3]);
         // 第六步：创建一个Writer对象，解决静态页面中文乱码问题，指定生成的文件名。
         File htmlFile = new File(realPath+"/hello.html");
         Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(htmlFile),"UTF-8"));
