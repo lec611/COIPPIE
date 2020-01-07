@@ -21,6 +21,11 @@ public class DocumentService {
     private String currentPark;
     private String currentYear;
     private String currentInvest;
+    private String currentUser;
+
+    public String getCurrentUser() { return currentUser; }
+
+    public void setCurrentUser(String currentUser) { this.currentUser = currentUser; }
 
     public String getCurrentPark() {
         return currentPark;
@@ -46,27 +51,26 @@ public class DocumentService {
         this.currentInvest = currentInvest;
     }
 
-    public void insertDocument(Document document){
+    public void insertDocument(Document document) {
         documentDao.persist(document);
         setCurrentPark(document.getPark());
         setCurrentYear(document.getYear());
         setCurrentInvest(document.getInvest());
+        setCurrentUser(document.getUser());
     }
 
-    public List<Document> showDocument(String option,String park_year_invest,String userName) throws OICPMPIEExceptions {
+    public List<Document> showDocument(String option, String park_year_invest, String userName) throws OICPMPIEExceptions {
         List<Document> documents = null;
-        if(option.equals("park")){
-            documents = documentDao.showByPark(userName,park_year_invest);
-        }
-        else if(option.equals("year")){
-            documents = documentDao.showByYear(userName,park_year_invest);
-        }
-        else if(option.equals("invest")){
-            documents = documentDao.showByInvest(userName,park_year_invest);
+        if (option.equals("park")) {
+            documents = documentDao.showByPark(userName, park_year_invest);
+        } else if (option.equals("year")) {
+            documents = documentDao.showByYear(userName, park_year_invest);
+        } else if (option.equals("invest")) {
+            documents = documentDao.showByInvest(userName, park_year_invest);
         }
 
-        if(documents == null){
-            throw new OICPMPIEExceptions(CodeEnum.DOCUMENT_ERROR,"未找到相关结果");
+        if (documents == null) {
+            throw new OICPMPIEExceptions(CodeEnum.DOCUMENT_ERROR, "未找到相关结果");
         }
 
         return documents;

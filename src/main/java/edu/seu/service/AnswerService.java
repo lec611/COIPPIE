@@ -66,13 +66,13 @@ public class AnswerService {
      * 上载用户评估结果push
      */
     public void uploadAnswer(String type,String data,double score){
-        String name = userService.getCurrentUser().getName();
+        String name = documentService.getCurrentUser();//userService.getCurrentUser().getName();
         String park = documentService.getCurrentPark();
         String year = documentService.getCurrentYear();
         String invest = documentService.getCurrentInvest();
 
         //若仍是该用户针对方才所填档案的评估回答，则执行更新操作
-        if(name.equals(getCurrentUser()) && park.equals(getCurrentPark()) && year.equals(getCurrentYear()) && invest.equals(getCurrentInvest())) {
+        if(name.equals(documentService.getCurrentUser()) && park.equals(getCurrentPark()) && year.equals(getCurrentYear()) && invest.equals(getCurrentInvest())) {
             int id = answerDao.selectID(name,park,year,invest);
             if (type.equals("environment")) {
                 answerDao.updateEnvironment(id,data,score);
@@ -106,12 +106,12 @@ public class AnswerService {
      * 生成评估报告时判断相应模块是否已填写并提交
      */
     public boolean isSubmitted(String type){
-        String name = userService.getCurrentUser().getName();
+        String name = documentService.getCurrentUser();
         String park = documentService.getCurrentPark();
         String year = documentService.getCurrentYear();
         String invest = documentService.getCurrentInvest();
 
-        if(getCurrentUser().equals(name) && getCurrentPark().equals(park) && getCurrentYear().equals(year) && getCurrentInvest().equals(invest)) {
+        if(documentService.getCurrentUser().equals(name) && getCurrentPark().equals(park) && getCurrentYear().equals(year) && getCurrentInvest().equals(invest)) {
             Answer answer = answerDao.queryAnswer(name,park,year,invest);
             if (type.equals("environment")) {
                 return answer.getEnvironment() != null;
@@ -154,7 +154,7 @@ public class AnswerService {
      * 返回对应问卷结果
      */
     public String answerScore(String type){
-        String name = userService.getCurrentUser().getName();
+        String name = documentService.getCurrentUser();
         String park = documentService.getCurrentPark();
         String year = documentService.getCurrentYear();
         String invest = documentService.getCurrentInvest();
@@ -183,18 +183,18 @@ public class AnswerService {
      *根据关键字匹配评估条目
      */
     public List<Answer> queryByCondition(String condition,String key) throws OICPMPIEExceptions {
-        String name = userService.getCurrentUser().getName();
-        if(name == null){
+        String Username = userService.getCurrentUser().getName();
+        if(Username == null){
             throw new OICPMPIEExceptions(CodeEnum.USER_ERROR,"用户未登录");
         }
-
+        //String name = documentService.getCurrentUser();
         List<Answer> answerList = null;
         if(condition.equals("park")){
-            answerList = answerDao.queryByPark(name,key);
+            answerList = answerDao.queryByPark(key);
         }else if (condition.equals("year")){
-            answerList = answerDao.queryByYear(name,key.substring(0,4));
+            answerList = answerDao.queryByYear(key.substring(0,4));
         }else if (condition.equals("invest")){
-            answerList = answerDao.queryByInvest(name,key);
+            answerList = answerDao.queryByInvest(key);
         }
         return answerList;
     }

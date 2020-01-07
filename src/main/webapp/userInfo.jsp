@@ -84,10 +84,30 @@
                 document.getElementById('email').value=result['email'];
                 document.getElementById('password').value=result['password'];
                 document.getElementById('mobilePhone').value=result['phoneNum'];
-                document.getElementById('sex').value=result['sex'];
-                document.getElementById('companyName').value=result['company'];
-                document.getElementById('companyAddress').value=result['address'];
-                document.getElementById('researchArea').value=result['domain'];
+                if(result['sex']==''||result['sex']==null){
+                    document.getElementById('sex').value='';
+                }
+                else{
+                    document.getElementById('sex').value=result['sex'];
+                }
+                if(result['company']==''||result['company']==null){
+                    document.getElementById('companyName').value='';
+                }
+                else{
+                    document.getElementById('companyName').value=result['company'];
+                }
+                if(result['address']==''||result['address']){
+                    document.getElementById('companyAddress').value='';
+                }
+                else{
+                    document.getElementById('companyAddress').value=result['address'];
+                }
+                if(result['domain']==''||result['domain']==null){
+                    document.getElementById('researchArea').value='';
+                }
+                else {
+                    document.getElementById('researchArea').value=result['domain'];
+                }
             },
             failure: function (data) {
                 alert("获取数据失败！");

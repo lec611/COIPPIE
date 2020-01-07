@@ -51,9 +51,15 @@
             <li class="dropdown pull-right layui-nav-item">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle" style="margin-top: -15px;">帮助</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#" style="color: #0C0C0C">关于软件</a></li>
+                    <li><a onclick="alert('软件名称：Web境外国际合作园区总体规划实施评估软件（简称OICPMPIE）\n'+
+                                          '软件版本号：V1.0\n'+
+                                          '开发机构：东南大学\n'+
+                                          '开发人员：王兴平、赵胜波、赵四东、施一峰、胡雪峰\n'+
+                                          '编程人员：戚晓芳、刘恩赐，徐成龙，喻学乐，贺黎，高建祥，周广振\n')" ;href="#" style="color: #0C0C0C">关于软件</a></li>
                     <li class="divider"></li>
-                    <li><a href="#" style="color: #0C0C0C">使用说明</a></li>
+                    <li><a href="${ctx}/guide.jsp" style="color: #0C0C0C">使用说明</a></li>
+                    <li class="divider"></li>
+                    <li><a onclick="alert('管理员：赵胜波\n邮箱：viczhao2nj@163.com')"; href="#" style="color: #0C0C0C">联系管理员</a></li>
                 </ul>
             </li>
             <li class="dropdown pull-right layui-nav-item">
