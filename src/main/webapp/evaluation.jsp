@@ -177,6 +177,8 @@
                }
                 if("total" == type)
                 {
+                    var result = eval('('+data+')');
+                    window.open('${ctx}/totalResult.jsp?subScore='+result.subScore+'&totalScore='+result.totalScore+'&level='+result.level);
                     showBarChart2(data)
                 }
                showBarChart(data);
