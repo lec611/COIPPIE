@@ -120,9 +120,17 @@
 <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js"></script>
 <script>
     $(function () {
+        isLogin();
         checkUserLogin();
     });
-
+    //限定登陆用户才能操作
+    function isLogin() {
+        var name = "<%=session.getAttribute("name")%>";
+        if(name == 'null'){
+            alert('请登录后操作');
+            window.location='${ctx}/index.jsp';
+        }
+    }
     // 显示用户信息
     function checkUserLogin() {
         var name = "<%=session.getAttribute("name")%>";

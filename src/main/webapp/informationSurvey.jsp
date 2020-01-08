@@ -116,6 +116,7 @@
 </body>
 <script>
     $(function () {
+        isLogin();
         checkUserLogin();
         $.ajax({
             type: 'post',
@@ -132,7 +133,14 @@
         });
 
     });
-
+    //检查是否登陆
+    function isLogin() {
+        var name = "<%=session.getAttribute("name")%>";
+        if(name == 'null'){
+            alert('请登录后操作');
+            window.location='${ctx}/index.jsp';
+        }
+    }
     // 显示用户信息
     function checkUserLogin() {
         var name = "<%=session.getAttribute("name")%>";

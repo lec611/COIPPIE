@@ -137,8 +137,17 @@
 <script>
 
     $(function () {
+        isLogin();
         checkUserLogin();
     });
+    //登陆后操作
+    function isLogin() {
+        var name = "<%=session.getAttribute("name")%>";
+        if(name == 'null'){
+            alert('请登录后操作');
+            window.location='${ctx}/index.jsp';
+        }
+    }
 
     // 显示用户信息
     function checkUserLogin() {
