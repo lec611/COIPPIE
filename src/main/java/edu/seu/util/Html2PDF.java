@@ -28,8 +28,17 @@ public class Html2PDF {
         // 第五步：创建一个模板使用的数据集，可以是pojo也可以是map。一般是Map。
         Map<String,String> dataModel = new HashMap();
         //处理分数
+
         String[] result = totalScore.split(",");
-        double totalResult = Double.parseDouble(result[4]);
+        double totalResult;
+        String Result = result[4];
+        if(!Result.equals("null"))
+        {
+            totalResult = Double.parseDouble(Result);
+        }else
+        {
+            totalResult = (Double.parseDouble(result[0])+Double.parseDouble(result[1])+Double.parseDouble(result[2])+Double.parseDouble(result[3]))/40.0;
+        }
         String level = "";
         if(totalResult >= 80){
             level = "优秀";
@@ -43,11 +52,12 @@ public class Html2PDF {
             level = "很差";
         }
 
+
         //向数据集中添加数据
         dataModel.put("title", "总得分情况");
         dataModel.put("year",year);
         dataModel.put("park",park);
-        dataModel.put("totalScore",result[4]);
+        dataModel.put("totalScore",totalResult+"");
         dataModel.put("level",level);
         dataModel.put("enScore",result[0]);
         dataModel.put("prScore",result[1]);
