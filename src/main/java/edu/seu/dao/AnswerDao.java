@@ -63,4 +63,7 @@ public interface AnswerDao {
 
     @Select({"select * from ", TABLE_NAME, "  invest=#{invest}"})
     List<Answer> queryByInvest(@Param("invest") String invest);
+
+    @Select({"select count(id ) from", TABLE_NAME ,"where user=#{name} and park=#{park} and year=#{year} and invest=#{invest}"})
+    int isExist(@Param("name") String name, @Param("park") String park, @Param("year") String year, @Param("invest") String invest);
 }

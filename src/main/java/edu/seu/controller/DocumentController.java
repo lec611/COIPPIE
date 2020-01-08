@@ -7,6 +7,7 @@ import edu.seu.base.CodeEnum;
 import edu.seu.base.CommonResponse;
 import edu.seu.exceptions.OICPMPIEExceptions;
 import edu.seu.model.Document;
+import edu.seu.model.User;
 import edu.seu.service.DocumentService;
 import edu.seu.service.UserService;
 import org.slf4j.Logger;

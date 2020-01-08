@@ -105,7 +105,7 @@
             <div style="margin-top: 20px;"><h4> 规划实施总体评估报告 <a onclick="checkResult('total')">（点击查看）</a></h4><br></div>
         </div>
         <div style="width:50%;">
-            <button class="btn btn-default">打印报告（P）</button>
+            <button class="btn btn-default" onclick="checkResult('total')">打印报告（P）</button>
             <button class="btn btn-default">关闭（C）</button>
         </div>
     </div>

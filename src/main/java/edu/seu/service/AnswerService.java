@@ -71,8 +71,16 @@ public class AnswerService {
         String year = documentService.getCurrentYear();
         String invest = documentService.getCurrentInvest();
 
+        int count = answerDao.isExist(name,park,year,invest);
+        if(count == 1)
+        {
+            setCurrentUser(name);
+            setCurrentPark(park);
+            setCurrentYear(year);
+            setCurrentInvest(invest);
+        }
         //若仍是该用户针对方才所填档案的评估回答，则执行更新操作
-        if(name.equals(documentService.getCurrentUser()) && park.equals(getCurrentPark()) && year.equals(getCurrentYear()) && invest.equals(getCurrentInvest())) {
+        if(name.equals(getCurrentUser())&&park.equals(getCurrentPark())&&year.equals(getCurrentYear()) && invest.equals(getCurrentInvest())) {
             int id = answerDao.selectID(name,park,year,invest);
             if (type.equals("environment")) {
                 answerDao.updateEnvironment(id,data,score);

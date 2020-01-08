@@ -98,7 +98,7 @@
                 <button type="button" class="btn btn-default" id="informationSurvey"><a href="${ctx}/informationSurvey.jsp" style="color: black;">信息调查</a></button>
             </li>
             <li class="dropdown pull-right layui-nav-item" >
-                <button type="button" class="btn btn-default" id="establishFile"><a href="${ctx}/establishFile.jsp" style="color: black;">建立档案</a></button>
+                <button type="button" class="btn btn-default" id="establishFile"><a onclick="isLogin()" style="color: black;">建立档案</a></button>
             </li>
         </ul>
         <ul class="layui-nav layui-layout-right head-nav-right">
@@ -117,17 +117,17 @@
             <div class="foEvaluate"><h2>评估流程：</h2></div>
             <div>
                 <div class="picDiv">
-                    <div style="float: left"><a href="establishFile.jsp"><img src="static/images/establishFile.png"></a><br><h4><b>建立档案</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
-                    <div style="float: left"><a href="informationSurvey.jsp"><img src="static/images/informationSurvey.png"></a><br><h4><b>信息调查</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
-                    <div style="float: left"><a href="evaluation.jsp"><img src="static/images/evaluation.png"></a><br><h4><b>评估分析</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
-                    <div style="float: left"><a href="informationService.jsp"><img src="static/images/informationService.png"></a><br><h4><b>信息查询</b></h4></div>
+                    <div style="float: left"><a href="#"><img onclick="isLogin()" src="static/images/establishFile.png"></a><br><h4><b>建立档案</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
+                    <div style="float: left"><a href="#"><img src="static/images/informationSurvey.png"></a><br><h4><b>信息调查</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
+                    <div style="float: left"><a href="#"><img src="static/images/evaluation.png"></a><br><h4><b>评估分析</b></h4></div><img src="static/images/pic1.png" style="float: left;margin-top: 40px;">
+                    <div style="float: left"><a href="${ctx}/informationService.jsp"><img src="static/images/informationService.png"></a><br><h4><b>信息查询</b></h4></div>
                 </div>
                 <div class="foDescribe">
                     <h2>适用单位</h2>
                     <h4>境外产业园区管理单位、投资单位、规划设计与咨询单位、建设单位、运营单位等</h4>
                 </div>
                 <div class="evaluateDiv">
-                    <button class="btn btn-default" onclick="window.location='${ctx}/establishFile.jsp'">开始评估</button>
+                    <button class="btn btn-default" onclick="isLogin()">开始评估</button>
                 </div>
             </div>
             <div id="showPdf"></div>
@@ -164,12 +164,21 @@
     $(function () {
         checkUserLogin();
     });
+    //检查是否登陆
+    function isLogin() {
+        var name = "<%=session.getAttribute("name")%>";
+        if(name == 'null'){
+            alert('请登录后操作');
+        }else
+        {
+            window.location='${ctx}/establishFile.jsp';
+        }
+    }
 
     // 显示用户信息
     function checkUserLogin() {
         var name = "<%=session.getAttribute("name")%>";
         var ticket = "<%=session.getAttribute("ticket")%>";
-
         if (name != null && ticket != null && name != "null" && ticket != "null") {
             document.getElementById('loginButton').style.display = 'none';
             document.getElementById('registerButton').style.display = 'none';

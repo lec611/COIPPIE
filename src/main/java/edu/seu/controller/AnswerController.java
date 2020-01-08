@@ -219,7 +219,7 @@ public class AnswerController {
             Html2PDF pdf = new Html2PDF();
             pdf.createPdf(realPath,user,park,year,invest,totalScore);
 
-            return JSON.toJSONString("success");
+            return JSON.toJSONString("下载成功");
 
         } catch (Exception e) {
             LOGGER.info(e.getMessage());
