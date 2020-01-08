@@ -107,9 +107,9 @@
             <div style="margin-left:60px;width: fit-content;"><h2><label class="label label-default">园区基本信息</label></h2></div>
             <form action="${ctx}/document/insert">
                 <div style="font-size:20px;border: 2px solid;margin-left:60px;margin-right:60px;padding:10px;"><!--method="post" enctype="multipart/form-data"-->
-                    园区名称<input type="text" class="inputStyle" name ="parkName">   建区年份<input type="text" class="inputStyle" name="constructionYear">  所在国家<input type="text" class="inputStyle" name="country"><br>
+                    园区名称<input type="text" class="inputStyle" name ="parkName" required="required"> 建区年份<input type="text" class="inputStyle" name="constructionYear"required="required">  所在国家<input type="text" class="inputStyle" name="country"><br>
                     规划产业<input type="text" class="inputStyle" name="planningIndustry">   规划规模<input type="text" class="inputStyle" name="planningScale"> (km²)   评估规模（规划）<input type="text" class="inputStyle" name="evaluationScale">(km²)<br>
-                    实建规模<input type="text" class="inputStyle" name="constructionScale">  (km²)   投资单位<input type="text" class="inputStyle" name="investmentUnit">   建设单位<input type="text" class="inputStyle" name="constructionUnit"><br>运营单位<input type="text" class="inputStyle" name="operatingUnit"><br>
+                    实建规模<input type="text" class="inputStyle" name="constructionScale">  (km²)   投资单位<input type="text" class="inputStyle" name="investmentUnit"required="required">   建设单位<input type="text" class="inputStyle" name="constructionUnit"><br>运营单位<input type="text" class="inputStyle" name="operatingUnit"><br>
                     总体规划平面图<br>
                     <input class="btn btn-default" type="file" name="images" onchange="viewImage(this)" id="fileupload" accept="image/*">
                     <div id="localimage" style="width: 200px;height: 200px;border:1px dashed;text-align: center;vertical-align: center"><img src="/wp-content/uploads/2014/06/download.png" class="img-thumbnail" id="preview"></div>
@@ -118,7 +118,7 @@
                 <hr style="margin-left:60px;margin-right:60px;">
                 <div style="margin-left:60px;width: fit-content;"><h2><label class="label label-default">评估者信息</label></h2></div>
                 <div style="font-size:20px;border: 2px solid;margin-left:60px;margin-right:60px;padding: 10px;">
-                    姓名<input type="text" class="inputStyle" name="personName"> 职业<input type="text" class="inputStyle" name="job">   工作单位<input type="text" class="inputStyle" name="workAddress">   手机号码<input type="text" class="inputStyle" name="phone"><br>
+                    姓名<input type="text" class="inputStyle" name="personName" required="required"> 职业<input type="text" class="inputStyle" name="job">   工作单位<input type="text" class="inputStyle" name="workAddress">   手机号码<input type="text" class="inputStyle" name="phone"><br>
                     电子邮件<input type="text" class="inputStyle" name="email"> 通讯地址<input type="text" class="inputStyle" name="address">
                 </div>
 
